@@ -5,5 +5,6 @@ module WetApp {
     requires javafx.web;
 
     opens pl.wojciechsiwek;
+    opens pl.wojciechsiwek.view;
 
 }
