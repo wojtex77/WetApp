@@ -32,7 +32,7 @@ public class Launcher extends Application {
         String pathToImg = s + "/src/main/resources/img/weather.png";
         stage.getIcons().add(new Image( "file:///" + pathToImg));
 
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
     }
 }
