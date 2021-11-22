@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import pl.wojciechsiwek.view.ViewFactory;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +19,7 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/MainWindow.fxml")));
+       /* Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/MainWindow.fxml")));
 
         Scene scene = new Scene(parent);
 
@@ -33,6 +34,9 @@ public class Launcher extends Application {
         stage.getIcons().add(new Image( "file:///" + pathToImg));
 
         stage.setResizable(true);
-        stage.show();
+        stage.show();*/
+
+        ViewFactory viewFactory = new ViewFactory(new WeatherManager());
+        viewFactory.showMainWindow();
     }
 }
