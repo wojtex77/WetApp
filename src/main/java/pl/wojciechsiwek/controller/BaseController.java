@@ -15,4 +15,7 @@ public class BaseController {
         this.fxmlName = fxmlName;
     }
 
+    public String getFxmlName() {
+        return fxmlName;
+    }
 }

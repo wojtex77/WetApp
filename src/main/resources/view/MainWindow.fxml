@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?package pl.wojciechsiwek.view.MainWindowController?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.wojciechsiwek.view.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar fx:id="menuBar" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -28,7 +28,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="refreshButton" layoutX="400.0" layoutY="25.0" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683" AnchorPane.topAnchor="25.0">
+      <Button fx:id="refreshButton" layoutX="400.0" layoutY="25.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683" AnchorPane.topAnchor="25.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>

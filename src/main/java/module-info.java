@@ -6,5 +6,6 @@ module WetApp {
 
     opens pl.wojciechsiwek;
     opens pl.wojciechsiwek.view;
+    opens pl.wojciechsiwek.controller;
 
 }
