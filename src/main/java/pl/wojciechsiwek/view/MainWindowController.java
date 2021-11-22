@@ -8,6 +8,8 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
+import pl.wojciechsiwek.controller.WeatherDataResult;
+import pl.wojciechsiwek.controller.services.GetDataService;
 
 public class MainWindowController extends BaseController {
 
@@ -49,5 +51,18 @@ public class MainWindowController extends BaseController {
     @FXML
     void refreshDataAction() {
         System.out.println("Data refreshing");
+
+        GetDataService getDataService = new GetDataService(weatherManager);
+        getDataService.start();
+        getDataService.setOnSucceeded(event -> {
+            WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
+
+            switch (weatherDataResult){
+                case SUCCESS:{
+                    System.out.println("Data refreshing done");
+
+                }
+            }
+        });
     }
 }
