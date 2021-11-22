@@ -21,17 +21,14 @@ public class ViewFactory {
     }
 
 
-
-    public void showMainWindow () {
-        System.out.println("Main window showed");
+    public void showMainWindow() {
+        System.out.println("Main window method called");
 
         BaseController controller = new MainWindowController(weatherManager, this, "/view/MainWindow.fxml");
         initializeStage(controller);
 
 
     }
-
-
 
 
     private void initializeStage(BaseController controller) {
@@ -58,8 +55,12 @@ public class ViewFactory {
         String pathToImg = s + "/src/main/resources/img/weather.png";
         stage.getIcons().add(new Image("file:///" + pathToImg));
 
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
 
+    }
+
+    public void closeStage(Stage stageToClose){
+        stageToClose.close();
     }
 }
