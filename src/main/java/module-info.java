@@ -3,6 +3,7 @@ module WetApp {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.web;
+    requires unirest.java;
 
     opens pl.wojciechsiwek;
     opens pl.wojciechsiwek.view;
