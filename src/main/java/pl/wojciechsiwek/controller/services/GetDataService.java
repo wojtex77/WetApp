@@ -2,6 +2,7 @@ package pl.wojciechsiwek.controller.services;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.JsonNode;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import pl.wojciechsiwek.WeatherManager;
@@ -30,12 +31,13 @@ public class GetDataService extends Service {
     private WeatherDataResult getWeatherData() {
 
         try {
-            HttpResponse<String> response = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=London%2Cuk&lat=0&lon=0&callback=test&id=2172797&lang=null&units=imperial&mode=xml")
+            HttpResponse<String> response = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=Warsaw%2Cpl&lat=0&lon=0&callback=test&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                     .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
                     .asString();
             System.out.println(response.getStatus());
             System.out.println(response.getHeaders().get("Content-Type"));
+            System.out.println(response.getBody());
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -35,6 +35,11 @@ public class MainWindowController extends BaseController {
     private MenuItem exitButton;
 
     @FXML
+    private Label actualizationInfo;
+
+
+
+    @FXML
     void exitProgramAction() {
         System.out.println("Exit program action called");
         Stage stage = (Stage) actualWeathCondLeft.getScene().getWindow();
@@ -51,6 +56,7 @@ public class MainWindowController extends BaseController {
     @FXML
     void refreshDataAction() {
         System.out.println("Data refreshing");
+        actualizationInfo.setVisible(true);
 
         GetDataService getDataService = new GetDataService(weatherManager);
         getDataService.start();
@@ -60,8 +66,12 @@ public class MainWindowController extends BaseController {
             switch (weatherDataResult){
                 case SUCCESS:{
                     System.out.println("Data refreshing done");
+                    actualizationInfo.setVisible(false);
+                    break;
 
                 }
+                case FAILED:
+                    break;
             }
         });
     }
