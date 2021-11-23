@@ -11,6 +11,9 @@ import pl.wojciechsiwek.controller.BaseController;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 import pl.wojciechsiwek.controller.services.GetDataService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainWindowController extends BaseController {
 
     @FXML
@@ -56,6 +59,7 @@ public class MainWindowController extends BaseController {
     @FXML
     void refreshDataAction() {
         System.out.println("Data refreshing");
+        actualizationInfo.setText("Aktualizuję dane...");
         actualizationInfo.setVisible(true);
 
         GetDataService getDataService = new GetDataService(weatherManager);
@@ -66,11 +70,17 @@ public class MainWindowController extends BaseController {
             switch (weatherDataResult){
                 case SUCCESS:{
                     System.out.println("Data refreshing done");
-                    actualizationInfo.setVisible(false);
+
+                    Date date = new Date(); // This object contains the current date value
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+                    System.out.println(formatter.format(date));
+                    actualizationInfo.setText("Ostatnio zaktualizowano " + formatter.format(date));
                     break;
 
                 }
                 case FAILED:
+                    System.out.println("Data refreshing failed");
+                    actualizationInfo.setText("Aktualizacja danych nie powiodła się");
                     break;
             }
         });
