@@ -1,5 +1,6 @@
 package pl.wojciechsiwek.view;
 
+import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +11,9 @@ import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 import pl.wojciechsiwek.controller.services.GetDataService;
+import pl.wojciechsiwek.model.WeatherData;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -71,10 +74,29 @@ public class MainWindowController extends BaseController {
                 case SUCCESS:{
                     System.out.println("Data refreshing done");
 
-                    Date date = new Date(); // This object contains the current date value
+                    //getting date for info when last actualization was
+                    Date date = new Date();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-                    System.out.println(formatter.format(date));
+
                     actualizationInfo.setText("Ostatnio zaktualizowano " + formatter.format(date));
+
+                    //converting json to object
+                    Gson gson = new Gson();
+                    WeatherData weatherData = gson.fromJson(String.valueOf(weatherManager.currentData), WeatherData.class);
+                    weatherData.convertMainToObject();
+
+                    System.out.println("Widocznośc: " + weatherData.getVisibility());
+                    System.out.println("Lokalizacja: " + weatherData.getName());
+                    System.out.println("Temperatura: " + weatherData.mainWeatherData.getTemp());
+                    System.out.println("Temperatura odczuwalna: " + weatherData.mainWeatherData.getFeels_like());
+                    System.out.println("Temperatura minimalna: " + weatherData.mainWeatherData.getTemp_min());
+                    System.out.println("Temperatura maksymalna: " + weatherData.mainWeatherData.getTemp_max());
+                    System.out.println("Wilgotność: " + weatherData.mainWeatherData.getHumidity());
+                    System.out.println("Ciśnienie: " + weatherData.mainWeatherData.getPressure());
+
+                    currentLocalization.setText(weatherData.getName());
+                    actualTempLeft.setText(String.valueOf(weatherData.mainWeatherData.getTemp()) + " " + (char)176 + "C");
+
                     break;
 
                 }

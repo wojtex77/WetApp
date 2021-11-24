@@ -1,8 +1,8 @@
 package pl.wojciechsiwek.controller.services;
 
 import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import pl.wojciechsiwek.WeatherManager;
@@ -37,9 +37,11 @@ public class GetDataService extends Service {
                     .asJson();
             System.out.println(response.getStatus());
             System.out.println(response.getHeaders().get("Content-Type"));
-            if (response.getStatus() == 200)
+            if (response.getStatus() == 200) {
+                weatherManager.currentData = response.getBody();
                 return WeatherDataResult.SUCCESS;
-        } catch (Exception e){
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return WeatherDataResult.FAILED;
         }

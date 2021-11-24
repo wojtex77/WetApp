@@ -36,7 +36,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="currentLocalization" alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" layoutY="56.0" text="Warsaw, PL" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+                  <Label fx:id="currentLocalization" alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" layoutY="56.0" text="" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
@@ -46,12 +46,12 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="actualTempLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="116.0" text="8 °C" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+                  <Label fx:id="actualTempLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="116.0" text="" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </Label>
-                  <Label fx:id="actualWeathCondLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="221.0" layoutY="163.0" text="Pochmurno" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
+                  <Label fx:id="actualWeathCondLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="221.0" layoutY="163.0" text="" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
                      <font>
                         <Font size="19.0" />
                      </font>
