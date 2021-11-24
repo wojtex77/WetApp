@@ -43,6 +43,9 @@ public class MainWindowController extends BaseController {
     @FXML
     private Label actualizationInfo;
 
+    @FXML
+    private Label tempFeelLeft;
+
 
 
     @FXML
@@ -93,9 +96,12 @@ public class MainWindowController extends BaseController {
                     System.out.println("Temperatura maksymalna: " + weatherData.mainWeatherData.getTemp_max());
                     System.out.println("Wilgotność: " + weatherData.mainWeatherData.getHumidity());
                     System.out.println("Ciśnienie: " + weatherData.mainWeatherData.getPressure());
+                    System.out.println("Opis: " + weatherData.mainWeatherData.getDescription());
 
                     currentLocalization.setText(weatherData.getName());
                     actualTempLeft.setText(String.valueOf(weatherData.mainWeatherData.getTemp()) + " " + (char)176 + "C");
+                    tempFeelLeft.setText("Odczuwalna: " + String.valueOf(weatherData.mainWeatherData.getFeels_like()) + " " + (char)176 + "C");
+                    actualWeathCondLeft.setText(weatherData.mainWeatherData.getDescription());
 
                     break;
 

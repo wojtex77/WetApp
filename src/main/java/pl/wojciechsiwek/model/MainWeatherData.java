@@ -3,6 +3,28 @@ package pl.wojciechsiwek.model;
 public class MainWeatherData {
     private float temp;
     private float temp_min;
+    private float humidity;
+    private float pressure;
+    private float feels_like;
+    private float temp_max;
+    private String description;
+    private String icon;
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
 
     public float getTemp_min() {
         return temp_min;
@@ -24,10 +46,6 @@ public class MainWeatherData {
         return temp_max;
     }
 
-    private float humidity;
-    private float pressure;
-    private float feels_like;
-    private float temp_max;
 
     public float getTemp() {
         return temp;
