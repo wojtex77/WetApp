@@ -9,15 +9,15 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?package pl.wojciechsiwek.view.MainWindowController?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.wojciechsiwek.view.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar fx:id="menuBar" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Lokacje">
+          <Menu mnemonicParsing="false" text="Program">
             <items>
               <MenuItem mnemonicParsing="false" text="Zarządzaj" />
+                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitProgramAction" text="Wyjście" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Informacje">
@@ -28,32 +28,42 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="refreshButton" layoutX="400.0" layoutY="25.0" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683" AnchorPane.topAnchor="25.0">
+      <Button fx:id="refreshButton" layoutX="400.0" layoutY="25.0" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <SplitPane cacheShape="false" centerShape="false" dividerPositions="0.5" focusTraversable="false" layoutX="400.0" layoutY="220.0" pickOnBounds="false" prefHeight="160.0" prefWidth="200.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <SplitPane cacheShape="false" centerShape="false" dividerPositions="0.5" focusTraversable="false" layoutX="400.0" layoutY="220.0" pickOnBounds="false" prefHeight="160.0" prefWidth="200.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="currentLocalization" alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" layoutY="56.0" text="Warsaw, PL" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
-                     <font>
-                        <Font name="System Bold" size="29.0" />
-                     </font>
-                  </Label>
                   <Label fx:id="leftHeader" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="6.0" prefHeight="17.0" prefWidth="394.0" text="Twoja bieżąca lokalizacja" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="actualTempLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="116.0" text="8 °C" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+                  <Label fx:id="currentLocalization" alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" layoutY="56.0" text="localization" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </Label>
-                  <Label fx:id="actualWeathCondLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="221.0" layoutY="163.0" text="Pochmurno" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
+                  <Label fx:id="actualTempLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="116.0" text="temp" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
                      <font>
-                        <Font size="19.0" />
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="tempFeelLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="171.0" text="feels" AnchorPane.bottomAnchor="339.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="actualWeathCondLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="227.0" text="condition" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="227.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="pressureLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="189.0" text="pressure" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="16.0" />
                      </font>
                   </Label>
                </children></AnchorPane>
@@ -63,5 +73,6 @@
                </effect></AnchorPane>
         </items>
       </SplitPane>
+      <Label fx:id="actualizationInfo" contentDisplay="CENTER" layoutX="625.0" layoutY="34.0" prefHeight="27.0" prefWidth="357.0" text="Aktualizuję dane..." visible="false" />
    </children>
 </AnchorPane>
