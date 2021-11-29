@@ -10,10 +10,9 @@ import javafx.stage.Stage;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
 import pl.wojciechsiwek.controller.WeatherDataResult;
-import pl.wojciechsiwek.controller.services.GetDataService;
+import pl.wojciechsiwek.controller.services.GetWeatherDataService;
 import pl.wojciechsiwek.model.WeatherData;
 
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -46,6 +45,10 @@ public class MainWindowController extends BaseController {
     @FXML
     private Label tempFeelLeft;
 
+    @FXML
+    private Label pressureLeft;
+
+
 
 
     @FXML
@@ -68,7 +71,7 @@ public class MainWindowController extends BaseController {
         actualizationInfo.setText("Aktualizuję dane...");
         actualizationInfo.setVisible(true);
 
-        GetDataService getDataService = new GetDataService(weatherManager);
+        GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager);
         getDataService.start();
         getDataService.setOnSucceeded(event -> {
             WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
@@ -101,6 +104,7 @@ public class MainWindowController extends BaseController {
                     currentLocalization.setText(weatherData.getName());
                     actualTempLeft.setText(String.valueOf(weatherData.mainWeatherData.getTemp()) + " " + (char)176 + "C");
                     tempFeelLeft.setText("Odczuwalna: " + String.valueOf(weatherData.mainWeatherData.getFeels_like()) + " " + (char)176 + "C");
+                    pressureLeft.setText("Ciśnienie: " + String.valueOf(weatherData.mainWeatherData.getPressure()) + " hPa");
                     actualWeathCondLeft.setText(weatherData.mainWeatherData.getDescription());
 
                     break;

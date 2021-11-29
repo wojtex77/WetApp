@@ -8,11 +8,11 @@ import javafx.concurrent.Task;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 
-public class GetDataService extends Service {
+public class GetWeatherDataService extends Service {
 
     WeatherManager weatherManager;
 
-    public GetDataService(WeatherManager weatherManager) {
+    public GetWeatherDataService(WeatherManager weatherManager) {
         this.weatherManager = weatherManager;
     }
 

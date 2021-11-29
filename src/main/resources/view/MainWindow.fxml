@@ -56,7 +56,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="actualWeathCondLeft" alignment="CENTER" contentDisplay="CENTER" layoutY="199.0" text="condition" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="199.0">
+                  <Label fx:id="actualWeathCondLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="227.0" text="condition" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="227.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="pressureLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="189.0" text="pressure" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -68,6 +73,6 @@
                </effect></AnchorPane>
         </items>
       </SplitPane>
-      <Label fx:id="actualizationInfo" contentDisplay="CENTER" layoutX="625.0" layoutY="34.0" prefHeight="17.0" prefWidth="357.0" text="Aktualizuję dane..." visible="false" />
+      <Label fx:id="actualizationInfo" contentDisplay="CENTER" layoutX="625.0" layoutY="34.0" prefHeight="27.0" prefWidth="357.0" text="Aktualizuję dane..." visible="false" />
    </children>
 </AnchorPane>
