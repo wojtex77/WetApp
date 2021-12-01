@@ -1,24 +1,19 @@
 package pl.wojciechsiwek.model;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-import com.mashape.unirest.http.JsonNode;
 
-import java.io.Reader;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class WeatherData {
+public class CurrentWeatherData {
 
     private int visibility;
     private String name;
 
     public JsonObject main;
     public ArrayList weather;
-    public MainWeatherData mainWeatherData;
+    public CurrentWeatherValues mainWeatherData;
 
     public String getName() {
         return name;
@@ -31,7 +26,7 @@ public class WeatherData {
 
     public void convertMainToObject(){
         Gson gson = new Gson();
-        mainWeatherData = gson.fromJson(String.valueOf(this.main), MainWeatherData.class);
+        mainWeatherData = gson.fromJson(String.valueOf(this.main), CurrentWeatherValues.class);
         Object obj = weather.get(0);
         String test = obj.toString();
 

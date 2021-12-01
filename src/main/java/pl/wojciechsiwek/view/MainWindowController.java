@@ -11,7 +11,8 @@ import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 import pl.wojciechsiwek.controller.services.GetWeatherDataService;
-import pl.wojciechsiwek.model.WeatherData;
+import pl.wojciechsiwek.model.CurrentWeatherData;
+import pl.wojciechsiwek.model.ForecastWeatherData;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -86,26 +87,33 @@ public class MainWindowController extends BaseController {
 
                     actualizationInfo.setText("Ostatnio zaktualizowano " + formatter.format(date));
 
-                    //converting json to object
-                    Gson gson = new Gson();
-                    WeatherData weatherData = gson.fromJson(String.valueOf(weatherManager.currentData), WeatherData.class);
-                    weatherData.convertMainToObject();
+                    //converting current weather json to object
+                    Gson currentDataJSON = new Gson();
+                    CurrentWeatherData currentWeatherData = currentDataJSON.fromJson(String.valueOf(weatherManager.currentData), CurrentWeatherData.class);
+                    currentWeatherData.convertMainToObject();
 
-                    System.out.println("Widocznośc: " + weatherData.getVisibility());
-                    System.out.println("Lokalizacja: " + weatherData.getName());
-                    System.out.println("Temperatura: " + weatherData.mainWeatherData.getTemp());
-                    System.out.println("Temperatura odczuwalna: " + weatherData.mainWeatherData.getFeels_like());
-                    System.out.println("Temperatura minimalna: " + weatherData.mainWeatherData.getTemp_min());
-                    System.out.println("Temperatura maksymalna: " + weatherData.mainWeatherData.getTemp_max());
-                    System.out.println("Wilgotność: " + weatherData.mainWeatherData.getHumidity());
-                    System.out.println("Ciśnienie: " + weatherData.mainWeatherData.getPressure());
-                    System.out.println("Opis: " + weatherData.mainWeatherData.getDescription());
+                    //converting forecast weather json to object
+                    Gson forecastData = new Gson();
+                    ForecastWeatherData forecastWeatherData = forecastData.fromJson(String.valueOf(weatherManager.forecastData), ForecastWeatherData.class);
 
-                    currentLocalization.setText(weatherData.getName());
-                    actualTempLeft.setText(String.valueOf(weatherData.mainWeatherData.getTemp()) + " " + (char)176 + "C");
-                    tempFeelLeft.setText("Odczuwalna: " + String.valueOf(weatherData.mainWeatherData.getFeels_like()) + " " + (char)176 + "C");
-                    pressureLeft.setText("Ciśnienie: " + String.valueOf(weatherData.mainWeatherData.getPressure()) + " hPa");
-                    actualWeathCondLeft.setText(weatherData.mainWeatherData.getDescription());
+/*
+                    System.out.println("Widocznośc: " + currentWeatherData.getVisibility());
+                    System.out.println("Lokalizacja: " + currentWeatherData.getName());
+                    System.out.println("Temperatura: " + currentWeatherData.mainWeatherData.getTemp());
+                    System.out.println("Temperatura odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like());
+                    System.out.println("Temperatura minimalna: " + currentWeatherData.mainWeatherData.getTemp_min());
+                    System.out.println("Temperatura maksymalna: " + currentWeatherData.mainWeatherData.getTemp_max());
+                    System.out.println("Wilgotność: " + currentWeatherData.mainWeatherData.getHumidity());
+                    System.out.println("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure());
+                    System.out.println("Opis: " + currentWeatherData.mainWeatherData.getDescription());
+*/
+                    currentLocalization.setText(currentWeatherData.getName());
+                    actualTempLeft.setText(String.valueOf(currentWeatherData.mainWeatherData.getTemp()) + " " + (char)176 + "C");
+                    tempFeelLeft.setText("Odczuwalna: " + String.valueOf(currentWeatherData.mainWeatherData.getFeels_like()) + " " + (char)176 + "C");
+                    pressureLeft.setText("Ciśnienie: " + String.valueOf(currentWeatherData.mainWeatherData.getPressure()) + " hPa");
+                    actualWeathCondLeft.setText(currentWeatherData.mainWeatherData.getDescription());
+
+                    System.out.println(forecastWeatherData.getList().get(0));
 
                     break;
 

@@ -1,6 +1,6 @@
 package pl.wojciechsiwek.model;
 
-public class MainWeatherData {
+public class CurrentWeatherValues {
     private float temp;
     private float temp_min;
     private float humidity;

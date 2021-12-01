@@ -31,16 +31,24 @@ public class GetWeatherDataService extends Service {
     private WeatherDataResult getWeatherData() {
 
         try {
-            HttpResponse<JsonNode> response = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=Warsaw%2Cpl&lat=0&lon=0&id=2172797&lang=pl&units=metric&mode=json")
+            HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?lat=49.6802&lon=19.2814&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                     .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
                     .asJson();
-            System.out.println(response.getStatus());
-            System.out.println(response.getHeaders().get("Content-Type"));
-            if (response.getStatus() == 200) {
-                weatherManager.currentData = response.getBody();
+
+            HttpResponse<JsonNode> forecastResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/forecast/daily?q=warsaw%2C%20pl&cnt=5&units=metric&mode=json&lang=pl")
+                    .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
+                    .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
+                    .asJson();
+            System.out.println("Forecast weather data response status: " + forecastResponse.getStatus());
+            System.out.println("Current weather data response status: " + currentWeatherResponse.getStatus());
+            if ((forecastResponse.getStatus() == 200) && (currentWeatherResponse.getStatus() == 200)) {
+                weatherManager.currentData = currentWeatherResponse.getBody();
+                weatherManager.forecastData = forecastResponse.getBody();
                 return WeatherDataResult.SUCCESS;
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
             return WeatherDataResult.FAILED;
