@@ -38,6 +38,7 @@ public class ForecastWeatherData {
             Gson gson = new Gson();
             ForecastWeatherValues object = gson.fromJson(list.get(i), ForecastWeatherValues.class);
             object.convertTemperatures();
+            object.convertWeatherToObject();
             forecast.add(object);
         }
 

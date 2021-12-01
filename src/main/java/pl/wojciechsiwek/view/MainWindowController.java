@@ -103,6 +103,8 @@ public class MainWindowController extends BaseController {
                     System.out.println("Wilgotność: " + currentWeatherData.mainWeatherData.getHumidity());
                     System.out.println("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure());
                     System.out.println("Opis: " + currentWeatherData.mainWeatherData.getDescription());
+                    System.out.println(forecastWeatherData.getForecast().get(0).getTemperatures().getDay());
+
 */
                     currentLocalization.setText(currentWeatherData.getName());
                     actualTempLeft.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
@@ -110,7 +112,7 @@ public class MainWindowController extends BaseController {
                     pressureLeft.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");
                     actualWeathCondLeft.setText(currentWeatherData.mainWeatherData.getDescription());
 
-                    System.out.println(forecastWeatherData.getForecast().get(0).getTemperatures().getDay());
+                    System.out.println(forecastWeatherData.getForecast().get(0).getDescription().getDescription());
 
 
                     break;
