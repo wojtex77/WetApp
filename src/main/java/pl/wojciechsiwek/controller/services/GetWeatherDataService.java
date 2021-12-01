@@ -31,7 +31,7 @@ public class GetWeatherDataService extends Service {
     private WeatherDataResult getWeatherData() {
 
         try {
-            HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?lat=49.6802&lon=19.2814&id=2172797&lang=pl&units=metric&mode=json")
+            HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=warsaw%2C%20pl&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                     .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
                     .asJson();

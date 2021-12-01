@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar fx:id="menuBar" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -28,7 +28,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="refreshButton" layoutX="400.0" layoutY="25.0" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683" AnchorPane.topAnchor="30.0">
+      <Button fx:id="refreshButton" layoutX="550.0" layoutY="30.0" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
@@ -66,6 +66,29 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
+                  <AnchorPane layoutX="6.0" layoutY="332.0" prefHeight="196.0" prefWidth="147.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="332.0">
+                     <children>
+                        <Label fx:id="temp1left" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" prefHeight="17.0" prefWidth="117.0" text="temp1left" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="temp1NightLeft" alignment="CENTER" contentDisplay="CENTER" layoutY="52.0" prefHeight="17.0" prefWidth="117.0" text="temp1NightLeft" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
+                        <Label fx:id="pressure1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" prefHeight="17.0" prefWidth="117.0" text="pressure1Left" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+                        <Label fx:id="hummidity1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="79.0" prefHeight="17.0" prefWidth="117.0" text="hummidity1Left" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+                        <Label fx:id="description1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="17.0" prefWidth="117.0" text="description1Left" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="date1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="62.0" prefHeight="17.0" prefWidth="117.0" text="date1Left" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="295.0" text="Prognoza" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="295.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="160.0" prefWidth="100.0">
                <effect>
@@ -73,6 +96,6 @@
                </effect></AnchorPane>
         </items>
       </SplitPane>
-      <Label fx:id="actualizationInfo" contentDisplay="CENTER" layoutX="625.0" layoutY="34.0" prefHeight="27.0" prefWidth="357.0" text="Aktualizuję dane..." visible="false" />
+      <Label fx:id="actualizationInfo" contentDisplay="CENTER" layoutX="764.0" layoutY="34.0" prefHeight="27.0" prefWidth="530.0" text="Aktualizuję dane..." visible="false" />
    </children>
 </AnchorPane>

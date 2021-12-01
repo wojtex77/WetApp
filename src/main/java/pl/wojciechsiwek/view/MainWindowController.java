@@ -15,6 +15,7 @@ import pl.wojciechsiwek.model.CurrentWeatherData;
 import pl.wojciechsiwek.model.ForecastWeatherData;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainWindowController extends BaseController {
@@ -50,6 +51,11 @@ public class MainWindowController extends BaseController {
     private Label pressureLeft;
 
 
+    @FXML
+    private Label date1Left, temp1left, temp1NightLeft, pressure1Left, hummidity1Left, description1Left;
+
+
+
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         super(weatherManager, viewFactory, fxmlName);
     }
@@ -79,9 +85,11 @@ public class MainWindowController extends BaseController {
 
                     //getting date for info when last actualization was
                     Date date = new Date();
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
-                    actualizationInfo.setText("Ostatnio zaktualizowano " + formatter.format(date));
+
+                    SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
+                    actualizationInfo.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
 
                     //converting current weather json to object
                     Gson currentDataJSON = new Gson();
@@ -93,26 +101,31 @@ public class MainWindowController extends BaseController {
                     ForecastWeatherData forecastWeatherData = forecastData.fromJson(String.valueOf(weatherManager.forecastData), ForecastWeatherData.class);
                     forecastWeatherData.convertListToArrayOfObjects();
 
-/*
-                    System.out.println("Widocznośc: " + currentWeatherData.getVisibility());
-                    System.out.println("Lokalizacja: " + currentWeatherData.getName());
-                    System.out.println("Temperatura: " + currentWeatherData.mainWeatherData.getTemp());
-                    System.out.println("Temperatura odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like());
-                    System.out.println("Temperatura minimalna: " + currentWeatherData.mainWeatherData.getTemp_min());
-                    System.out.println("Temperatura maksymalna: " + currentWeatherData.mainWeatherData.getTemp_max());
-                    System.out.println("Wilgotność: " + currentWeatherData.mainWeatherData.getHumidity());
-                    System.out.println("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure());
-                    System.out.println("Opis: " + currentWeatherData.mainWeatherData.getDescription());
-                    System.out.println(forecastWeatherData.getForecast().get(0).getTemperatures().getDay());
 
-*/
                     currentLocalization.setText(currentWeatherData.getName());
                     actualTempLeft.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
                     tempFeelLeft.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
                     pressureLeft.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");
                     actualWeathCondLeft.setText(currentWeatherData.mainWeatherData.getDescription());
 
+// next day data
+                    SimpleDateFormat formatershort = new SimpleDateFormat("dd.MM.yy");
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(date);
+                    calendar.add(Calendar.DATE, 1);
+                    date = calendar.getTime();
+
+                    date1Left.setText(formatershort.format(date));
+                    temp1left.setText("dzień: " + forecastWeatherData.getForecast().get(0).getTemperatures().getDay() + " " + (char) 176 + "C");
+                    temp1NightLeft.setText("noc: " + forecastWeatherData.getForecast().get(0).getTemperatures().getNight() + " " + (char) 176 + "C");
+                    pressure1Left.setText("ciśnienie: " + forecastWeatherData.getForecast().get(0).getPressure() + " hPa");
+                    hummidity1Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(0).getHumidity() + " %");
+                    hummidity1Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(0).getHumidity() + " %");
+                    description1Left.setText(forecastWeatherData.getForecast().get(0).getDescription().getDescription());
+
                     System.out.println(forecastWeatherData.getForecast().get(0).getDescription().getDescription());
+
 
 
                     break;
