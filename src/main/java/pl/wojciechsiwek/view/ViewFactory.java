@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ViewFactory {
-    private WeatherManager weatherManager;
+    private final WeatherManager weatherManager;
 
     public ViewFactory(WeatherManager weatherManager) {
         this.weatherManager = weatherManager;
@@ -60,7 +60,7 @@ public class ViewFactory {
 
     }
 
-    public void closeStage(Stage stageToClose){
+    public void closeStage(Stage stageToClose) {
         stageToClose.close();
     }
 }

@@ -50,7 +50,9 @@ public class MainWindowController extends BaseController {
     private Label pressureLeft;
 
 
-
+    public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
+        super(weatherManager, viewFactory, fxmlName);
+    }
 
     @FXML
     void exitProgramAction() {
@@ -58,12 +60,6 @@ public class MainWindowController extends BaseController {
         Stage stage = (Stage) actualWeathCondLeft.getScene().getWindow();
         viewFactory.closeStage(stage);
 
-    }
-
-
-
-    public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
-        super(weatherManager, viewFactory, fxmlName);
     }
 
     @FXML
@@ -77,8 +73,8 @@ public class MainWindowController extends BaseController {
         getDataService.setOnSucceeded(event -> {
             WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
 
-            switch (weatherDataResult){
-                case SUCCESS:{
+            switch (weatherDataResult) {
+                case SUCCESS: {
                     System.out.println("Data refreshing done");
 
                     //getting date for info when last actualization was
@@ -95,6 +91,7 @@ public class MainWindowController extends BaseController {
                     //converting forecast weather json to object
                     Gson forecastData = new Gson();
                     ForecastWeatherData forecastWeatherData = forecastData.fromJson(String.valueOf(weatherManager.forecastData), ForecastWeatherData.class);
+                    forecastWeatherData.convertListToArrayOfObjects();
 
 /*
                     System.out.println("Widocznośc: " + currentWeatherData.getVisibility());
@@ -108,12 +105,13 @@ public class MainWindowController extends BaseController {
                     System.out.println("Opis: " + currentWeatherData.mainWeatherData.getDescription());
 */
                     currentLocalization.setText(currentWeatherData.getName());
-                    actualTempLeft.setText(String.valueOf(currentWeatherData.mainWeatherData.getTemp()) + " " + (char)176 + "C");
-                    tempFeelLeft.setText("Odczuwalna: " + String.valueOf(currentWeatherData.mainWeatherData.getFeels_like()) + " " + (char)176 + "C");
-                    pressureLeft.setText("Ciśnienie: " + String.valueOf(currentWeatherData.mainWeatherData.getPressure()) + " hPa");
+                    actualTempLeft.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
+                    tempFeelLeft.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
+                    pressureLeft.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");
                     actualWeathCondLeft.setText(currentWeatherData.mainWeatherData.getDescription());
 
-                    System.out.println(forecastWeatherData.getList().get(0));
+                    System.out.println(forecastWeatherData.getForecast().get(0).getTemperatures().getDay());
+
 
                     break;
 
