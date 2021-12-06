@@ -8,12 +8,20 @@ import javafx.concurrent.Task;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 
+import java.util.Locale;
+
 public class GetWeatherDataService extends Service {
 
     WeatherManager weatherManager;
+    String location;
 
-    public GetWeatherDataService(WeatherManager weatherManager) {
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public GetWeatherDataService(WeatherManager weatherManager, String location) {
         this.weatherManager = weatherManager;
+        this.location = location;
     }
 
 
@@ -22,29 +30,30 @@ public class GetWeatherDataService extends Service {
         return new Task<WeatherDataResult>() {
             @Override
             protected WeatherDataResult call() throws Exception {
-                return getWeatherData();
+                return getWeatherDataLeft(location);
             }
         };
     }
 
 
-    private WeatherDataResult getWeatherData() {
+    private WeatherDataResult getWeatherDataLeft(String location) {
 
+        location = location.toLowerCase(Locale.ROOT).replace(",","%2C").replace(" ", "%20");
         try {
-            HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=warsaw%2C%20pl&id=2172797&lang=pl&units=metric&mode=json")
+            HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=" + location + "&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                     .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
                     .asJson();
 
-            HttpResponse<JsonNode> forecastResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/forecast/daily?q=warsaw%2C%20pl&cnt=5&units=metric&mode=json&lang=pl")
+            HttpResponse<JsonNode> forecastResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/forecast/daily?q=" + location + "&cnt=5&units=metric&mode=json&lang=pl")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                     .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
                     .asJson();
             System.out.println("Forecast weather data response status: " + forecastResponse.getStatus());
             System.out.println("Current weather data response status: " + currentWeatherResponse.getStatus());
             if ((forecastResponse.getStatus() == 200) && (currentWeatherResponse.getStatus() == 200)) {
-                weatherManager.currentData = currentWeatherResponse.getBody();
-                weatherManager.forecastData = forecastResponse.getBody();
+                weatherManager.currentDataLeft = currentWeatherResponse.getBody();
+                weatherManager.forecastDataLeft = forecastResponse.getBody();
                 return WeatherDataResult.SUCCESS;
             }
 

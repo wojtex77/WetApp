@@ -39,7 +39,7 @@ public class MainWindowController extends BaseController {
     private MenuItem exitButton;
 
     @FXML
-    private Label actualizationInfo;
+    private Label actualizationInfoLeft;
 
     @FXML
     private Label tempFeelLeft;
@@ -49,6 +49,10 @@ public class MainWindowController extends BaseController {
 
     @FXML
     private SplitPane splitPane;
+
+
+    @FXML
+    private TextField localizationInputLeft;
 
 
     @FXML
@@ -86,10 +90,10 @@ public class MainWindowController extends BaseController {
     @FXML
     void refreshDataAction() {
         System.out.println("Data refreshing");
-        actualizationInfo.setText("Aktualizuję dane...");
-        actualizationInfo.setVisible(true);
+        actualizationInfoLeft.setText("Aktualizuję dane...");
+        actualizationInfoLeft.setVisible(true);
 
-        GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager);
+        GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager,localizationInputLeft.getText());
         getDataService.start();
         getDataService.setOnSucceeded(event -> {
             WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
@@ -105,7 +109,7 @@ public class MainWindowController extends BaseController {
                 }
                 case FAILED:
                     System.out.println("Data refreshing failed");
-                    actualizationInfo.setText("Aktualizacja danych nie powiodła się");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się");
                     break;
             }
         });
@@ -116,16 +120,16 @@ public class MainWindowController extends BaseController {
         Date date = new Date();
         SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
-        actualizationInfo.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
+        actualizationInfoLeft.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
 
         //converting current weather json to object
         Gson currentDataJSON = new Gson();
-        CurrentWeatherData currentWeatherData = currentDataJSON.fromJson(String.valueOf(weatherManager.currentData), CurrentWeatherData.class);
+        CurrentWeatherData currentWeatherData = currentDataJSON.fromJson(String.valueOf(weatherManager.currentDataLeft), CurrentWeatherData.class);
         currentWeatherData.convertMainToObject();
 
         //converting forecast weather json to object
         Gson forecastData = new Gson();
-        ForecastWeatherData forecastWeatherData = forecastData.fromJson(String.valueOf(weatherManager.forecastData), ForecastWeatherData.class);
+        ForecastWeatherData forecastWeatherData = forecastData.fromJson(String.valueOf(weatherManager.forecastDataLeft), ForecastWeatherData.class);
         forecastWeatherData.convertListToArrayOfObjects();
 
 
