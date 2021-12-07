@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ViewFactory {
-    private WeatherManager weatherManager;
+    private final WeatherManager weatherManager;
 
     public ViewFactory(WeatherManager weatherManager) {
         this.weatherManager = weatherManager;
@@ -55,12 +55,14 @@ public class ViewFactory {
         String pathToImg = s + "/src/main/resources/img/weather.png";
         stage.getIcons().add(new Image("file:///" + pathToImg));
 
-        stage.setResizable(false);
+
+
+        stage.setResizable(true);
         stage.show();
 
     }
 
-    public void closeStage(Stage stageToClose){
+    public void closeStage(Stage stageToClose) {
         stageToClose.close();
     }
 }

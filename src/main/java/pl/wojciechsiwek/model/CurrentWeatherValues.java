@@ -1,6 +1,6 @@
 package pl.wojciechsiwek.model;
 
-public class MainWeatherData {
+public class CurrentWeatherValues {
     private float temp;
     private float temp_min;
     private float humidity;
@@ -10,20 +10,20 @@ public class MainWeatherData {
     private String description;
     private String icon;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getIcon() {
         return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public float getTemp_min() {
