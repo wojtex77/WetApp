@@ -29,41 +29,67 @@ public class MainWindowController extends BaseController {
     private Button refreshButton;
 
     @FXML
-    private Label currentLocalization, secondLocalization;
+    private Label currentLocalization;
 
     @FXML
-    private Label coordinatesLeft, coordinatesRight;
+    private Label secondLocalization;
 
     @FXML
-    private Label forecastLabelLeft, forecastLabelRight;
+    private Label coordinatesLeft;
+
+    @FXML
+    private Label coordinatesRight;
+
+    @FXML
+    private Label forecastLabelLeft;
+
+    @FXML
+    private Label forecastLabelRight;
 
     @FXML
     private Label leftHeader;
 
     @FXML
-    private Label actualTempLeft, actualTempRight;
+    private Label actualTempLeft;
 
     @FXML
-    private Label actualWeathCondLeft, actualWeathCondRight;
+    private Label actualTempRight;
+
+    @FXML
+    private Label actualWeathCondLeft;
+
+    @FXML
+    private Label actualWeathCondRight;
 
     @FXML
     private MenuItem exitButton;
 
     @FXML
-    private Label actualizationInfoLeft, actualizationInfoRight;
+    private Label actualizationInfoLeft;
 
     @FXML
-    private Label tempFeelLeft, tempFeelRight;
+    private Label actualizationInfoRight;
 
     @FXML
-    private Label pressureLeft, pressureRight;
+    private Label tempFeelLeft;
+
+    @FXML
+    private Label tempFeelRight;
+
+    @FXML
+    private Label pressureLeft;
+
+    @FXML
+    private Label pressureRight;
 
     @FXML
     private SplitPane splitPane;
 
+    @FXML
+    private TextField localizationInputRight;
 
     @FXML
-    private TextField localizationInputLeft, localizationInputRight;
+    private TextField localizationInputLeft;
 
 
     @FXML
@@ -120,7 +146,7 @@ public class MainWindowController extends BaseController {
         actualizationInfoLeft.setText("Aktualizuję dane...");
         actualizationInfoLeft.setVisible(true);
 
-        GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager,localizationInputLeft.getText());
+        GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager,localizationInputLeft.getText(), localizationInputRight.getText());
         getDataService.start();
         getDataService.setOnSucceeded(event -> {
             WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
@@ -137,6 +163,7 @@ public class MainWindowController extends BaseController {
                 case FAILED:
                     System.out.println("Data refreshing failed");
                     actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się");
                     break;
             }
         });
@@ -148,27 +175,49 @@ public class MainWindowController extends BaseController {
         SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
         actualizationInfoLeft.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
+        actualizationInfoRight.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
 
         //converting current weather json to object
         Gson currentDataJSON = new Gson();
-        CurrentWeatherData currentWeatherData = currentDataJSON.fromJson(String.valueOf(weatherManager.currentDataLeft), CurrentWeatherData.class);
-        currentWeatherData.convertMainToObject();
+        CurrentWeatherData currentWeatherDataLeft = currentDataJSON.fromJson(String.valueOf(weatherManager.currentDataLeft), CurrentWeatherData.class);
+        CurrentWeatherData currentWeatherDataRight = currentDataJSON.fromJson(String.valueOf(weatherManager.currentDataRight), CurrentWeatherData.class);
+        currentWeatherDataLeft.convertMainToObject();
+        currentWeatherDataRight.convertMainToObject();
 
         //converting forecast weather json to object
-        Gson forecastData = new Gson();
-        ForecastWeatherData forecastWeatherData = forecastData.fromJson(String.valueOf(weatherManager.forecastDataLeft), ForecastWeatherData.class);
-        forecastWeatherData.convertListToArrayOfObjects();
-        forecastWeatherData.convertCityToObject();
-        forecastWeatherData.cityObject.convertCoordinatesToObject();
+        Gson forecastDataLeft = new Gson();
+        ForecastWeatherData forecastWeatherDataLeft = forecastDataLeft.fromJson(String.valueOf(weatherManager.forecastDataLeft), ForecastWeatherData.class);
 
+        Gson forecastDataRight = new Gson();
+        ForecastWeatherData forecastWeatherDataRight = forecastDataRight.fromJson(String.valueOf(weatherManager.forecastDataRight), ForecastWeatherData.class);
+
+        forecastWeatherDataLeft.convertListToArrayOfObjects();
+        forecastWeatherDataLeft.convertCityToObject();
+        forecastWeatherDataLeft.cityObject.convertCoordinatesToObject();
+
+        forecastWeatherDataRight.convertListToArrayOfObjects();
+        forecastWeatherDataRight.convertCityToObject();
+        forecastWeatherDataRight.cityObject.convertCoordinatesToObject();
+
+        //left side
         forecastLabelLeft.setVisible(true);
-        coordinatesLeft.setText("Szerokość: " + forecastWeatherData.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherData.cityObject.coordinates.getLon());
+        coordinatesLeft.setText("Szerokość: " + forecastWeatherDataLeft.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherDataLeft.cityObject.coordinates.getLon());
         coordinatesLeft.setVisible(true);
-        currentLocalization.setText(currentWeatherData.getName() + ", " + forecastWeatherData.getCityObject().getCountry());
-        actualTempLeft.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
-        tempFeelLeft.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
-        pressureLeft.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");
-        actualWeathCondLeft.setText(currentWeatherData.mainWeatherData.getDescription());
+        currentLocalization.setText(currentWeatherDataLeft.getName() + ", " + forecastWeatherDataLeft.getCityObject().getCountry());
+        actualTempLeft.setText(currentWeatherDataLeft.mainWeatherData.getTemp() + " " + (char) 176 + "C");
+        tempFeelLeft.setText("Odczuwalna: " + currentWeatherDataLeft.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
+        pressureLeft.setText("Ciśnienie: " + currentWeatherDataLeft.mainWeatherData.getPressure() + " hPa");
+        actualWeathCondLeft.setText(currentWeatherDataLeft.mainWeatherData.getDescription());
+
+        //right side
+        forecastLabelRight.setVisible(true);
+        coordinatesRight.setText("Szerokość: " + forecastWeatherDataRight.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherDataRight.cityObject.coordinates.getLon());
+        coordinatesRight.setVisible(true);
+        secondLocalization.setText(currentWeatherDataRight.getName() + ", " + forecastWeatherDataRight.getCityObject().getCountry());
+        actualTempRight.setText(currentWeatherDataRight.mainWeatherData.getTemp() + " " + (char) 176 + "C");
+        tempFeelRight.setText("Odczuwalna: " + currentWeatherDataRight.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
+        pressureRight.setText("Ciśnienie: " + currentWeatherDataRight.mainWeatherData.getPressure() + " hPa");
+        actualWeathCondRight.setText(currentWeatherDataRight.mainWeatherData.getDescription());
 
 // first day data
         SimpleDateFormat formatershort1 = new SimpleDateFormat("dd.MM.yy");
@@ -179,12 +228,12 @@ public class MainWindowController extends BaseController {
         date = calendar.getTime();
 
         date1Left.setText(formatershort1.format(date));
-        temp1left.setText("dzień: " + forecastWeatherData.getForecast().get(0).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp1NightLeft.setText("noc: " + forecastWeatherData.getForecast().get(0).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure1Left.setText("ciśnienie: " + forecastWeatherData.getForecast().get(0).getPressure() + " hPa");
-        hummidity1Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(0).getHumidity() + " %");
-        hummidity1Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(0).getHumidity() + " %");
-        description1Left.setText(forecastWeatherData.getForecast().get(0).getDescription().getDescription());
+        temp1left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(0).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp1NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(0).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure1Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(0).getPressure() + " hPa");
+        hummidity1Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(0).getHumidity() + " %");
+        hummidity1Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(0).getHumidity() + " %");
+        description1Left.setText(forecastWeatherDataLeft.getForecast().get(0).getDescription().getDescription());
 
 
 // second day data
@@ -195,12 +244,12 @@ public class MainWindowController extends BaseController {
         date = calendar.getTime();
 
         date2Left.setText(formatershort2.format(date));
-        temp2left.setText("dzień: " + forecastWeatherData.getForecast().get(1).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp2NightLeft.setText("noc: " + forecastWeatherData.getForecast().get(1).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure2Left.setText("ciśnienie: " + forecastWeatherData.getForecast().get(1).getPressure() + " hPa");
-        hummidity2Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(1).getHumidity() + " %");
-        hummidity2Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(1).getHumidity() + " %");
-        description2Left.setText(forecastWeatherData.getForecast().get(1).getDescription().getDescription());
+        temp2left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(1).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp2NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(1).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure2Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(1).getPressure() + " hPa");
+        hummidity2Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(1).getHumidity() + " %");
+        hummidity2Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(1).getHumidity() + " %");
+        description2Left.setText(forecastWeatherDataLeft.getForecast().get(1).getDescription().getDescription());
 
 
 // third day data
@@ -211,12 +260,12 @@ public class MainWindowController extends BaseController {
         date = calendar.getTime();
 
         date3Left.setText(formatershort3.format(date));
-        temp3left.setText("dzień: " + forecastWeatherData.getForecast().get(2).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp3NightLeft.setText("noc: " + forecastWeatherData.getForecast().get(2).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure3Left.setText("ciśnienie: " + forecastWeatherData.getForecast().get(2).getPressure() + " hPa");
-        hummidity3Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(2).getHumidity() + " %");
-        hummidity3Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(2).getHumidity() + " %");
-        description3Left.setText(forecastWeatherData.getForecast().get(2).getDescription().getDescription());
+        temp3left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(2).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp3NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(2).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure3Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(2).getPressure() + " hPa");
+        hummidity3Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(2).getHumidity() + " %");
+        hummidity3Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(2).getHumidity() + " %");
+        description3Left.setText(forecastWeatherDataLeft.getForecast().get(2).getDescription().getDescription());
 
 
 // fourth day data
@@ -227,12 +276,12 @@ public class MainWindowController extends BaseController {
         date = calendar.getTime();
 
         date4Left.setText(formatershort4.format(date));
-        temp4left.setText("dzień: " + forecastWeatherData.getForecast().get(3).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp4NightLeft.setText("noc: " + forecastWeatherData.getForecast().get(3).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure4Left.setText("ciśnienie: " + forecastWeatherData.getForecast().get(3).getPressure() + " hPa");
-        hummidity4Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(3).getHumidity() + " %");
-        hummidity4Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(3).getHumidity() + " %");
-        description4Left.setText(forecastWeatherData.getForecast().get(3).getDescription().getDescription());
+        temp4left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(3).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp4NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(3).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure4Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(3).getPressure() + " hPa");
+        hummidity4Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(3).getHumidity() + " %");
+        hummidity4Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(3).getHumidity() + " %");
+        description4Left.setText(forecastWeatherDataLeft.getForecast().get(3).getDescription().getDescription());
 
 // fifth day data
         SimpleDateFormat formatershort5 = new SimpleDateFormat("dd.MM.yy");
@@ -242,12 +291,12 @@ public class MainWindowController extends BaseController {
         date = calendar.getTime();
 
         date5Left.setText(formatershort5.format(date));
-        temp5left.setText("dzień: " + forecastWeatherData.getForecast().get(4).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp5NightLeft.setText("noc: " + forecastWeatherData.getForecast().get(4).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure5Left.setText("ciśnienie: " + forecastWeatherData.getForecast().get(4).getPressure() + " hPa");
-        hummidity5Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(4).getHumidity() + " %");
-        hummidity5Left.setText("wilgotność: " + forecastWeatherData.getForecast().get(4).getHumidity() + " %");
-        description5Left.setText(forecastWeatherData.getForecast().get(4).getDescription().getDescription());
+        temp5left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(4).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp5NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(4).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure5Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(4).getPressure() + " hPa");
+        hummidity5Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(4).getHumidity() + " %");
+        hummidity5Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(4).getHumidity() + " %");
+        description5Left.setText(forecastWeatherDataLeft.getForecast().get(4).getDescription().getDescription());
 
     }
 }

@@ -13,15 +13,13 @@ import java.util.Locale;
 public class GetWeatherDataService extends Service {
 
     WeatherManager weatherManager;
-    String location;
+    String locationLeft;
+    String locationRight;
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public GetWeatherDataService(WeatherManager weatherManager, String location) {
+    public GetWeatherDataService(WeatherManager weatherManager, String locationLeft, String locationRight) {
         this.weatherManager = weatherManager;
-        this.location = location;
+        this.locationLeft = locationLeft;
+        this.locationRight = locationRight;
     }
 
 
@@ -30,30 +28,48 @@ public class GetWeatherDataService extends Service {
         return new Task<WeatherDataResult>() {
             @Override
             protected WeatherDataResult call() throws Exception {
-                return getWeatherDataLeft(location);
+                return getWeatherDataLeft(locationLeft, locationRight);
             }
         };
     }
 
 
-    private WeatherDataResult getWeatherDataLeft(String location) {
+    private WeatherDataResult getWeatherDataLeft(String locationLeft, String locationRight) {
 
-        location = location.toLowerCase(Locale.ROOT).replace(",","%2C").replace(" ", "%20");
+        locationLeft = locationLeft.toLowerCase(Locale.ROOT).replace(",","%2C").replace(" ", "%20");
         try {
-            HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=" + location + "&id=2172797&lang=pl&units=metric&mode=json")
+            HttpResponse<JsonNode> currentWeatherResponseLeft = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=" + locationLeft + "&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                     .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
                     .asJson();
 
-            HttpResponse<JsonNode> forecastResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/forecast/daily?q=" + location + "&cnt=5&units=metric&mode=json&lang=pl")
+            HttpResponse<JsonNode> forecastResponseLeft = Unirest.get("https://community-open-weather-map.p.rapidapi.com/forecast/daily?q=" + locationLeft + "&cnt=5&units=metric&mode=json&lang=pl")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
                     .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
                     .asJson();
-            System.out.println("Forecast weather data response status: " + forecastResponse.getStatus());
-            System.out.println("Current weather data response status: " + currentWeatherResponse.getStatus());
-            if ((forecastResponse.getStatus() == 200) && (currentWeatherResponse.getStatus() == 200)) {
-                weatherManager.currentDataLeft = currentWeatherResponse.getBody();
-                weatherManager.forecastDataLeft = forecastResponse.getBody();
+
+
+            HttpResponse<JsonNode> currentWeatherResponseRight = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=" + locationRight + "&id=2172797&lang=pl&units=metric&mode=json")
+                    .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
+                    .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
+                    .asJson();
+
+            HttpResponse<JsonNode> forecastResponseRight = Unirest.get("https://community-open-weather-map.p.rapidapi.com/forecast/daily?q=" + locationRight + "&cnt=5&units=metric&mode=json&lang=pl")
+                    .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
+                    .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
+                    .asJson();
+
+
+
+            System.out.println("Forecast left weather data response status: " + forecastResponseLeft.getStatus());
+            System.out.println("Current left weather data response status: " + currentWeatherResponseLeft.getStatus());
+            System.out.println("Forecast right weather data response status: " + forecastResponseRight.getStatus());
+            System.out.println("Current right weather data response status: " + currentWeatherResponseRight.getStatus());
+            if ((forecastResponseLeft.getStatus() == 200) && (currentWeatherResponseLeft.getStatus() == 200) && (forecastResponseRight.getStatus() == 200) && (currentWeatherResponseRight.getStatus() == 200)) {
+                weatherManager.currentDataLeft = currentWeatherResponseLeft.getBody();
+                weatherManager.forecastDataLeft = forecastResponseLeft.getBody();
+                weatherManager.currentDataRight = currentWeatherResponseRight.getBody();
+                weatherManager.forecastDataRight = forecastResponseRight.getBody();
                 return WeatherDataResult.SUCCESS;
             }
 
