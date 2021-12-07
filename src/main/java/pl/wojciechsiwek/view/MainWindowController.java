@@ -147,6 +147,7 @@ public class MainWindowController extends BaseController {
 
         forecastLabelLeft.setVisible(true);
         coordinatesLeft.setText("Szerokość: " + forecastWeatherData.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherData.cityObject.coordinates.getLon());
+        coordinatesLeft.setVisible(true);
         currentLocalization.setText(currentWeatherData.getName() + ", " + forecastWeatherData.getCityObject().getCountry());
         actualTempLeft.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
         tempFeelLeft.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
