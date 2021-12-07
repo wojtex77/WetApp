@@ -3,6 +3,11 @@ package pl.wojciechsiwek.view;
 import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
@@ -25,6 +30,12 @@ public class MainWindowController extends BaseController {
 
     @FXML
     private Label currentLocalization;
+
+    @FXML
+    private Label coordinatesLeft;
+
+    @FXML
+    private Label forecastLabelLeft;
 
     @FXML
     private Label leftHeader;
@@ -131,9 +142,12 @@ public class MainWindowController extends BaseController {
         Gson forecastData = new Gson();
         ForecastWeatherData forecastWeatherData = forecastData.fromJson(String.valueOf(weatherManager.forecastDataLeft), ForecastWeatherData.class);
         forecastWeatherData.convertListToArrayOfObjects();
+        forecastWeatherData.convertCityToObject();
+        forecastWeatherData.cityObject.convertCoordinatesToObject();
 
-
-        currentLocalization.setText(currentWeatherData.getName());
+        forecastLabelLeft.setVisible(true);
+        coordinatesLeft.setText("Szerokość: " + forecastWeatherData.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherData.cityObject.coordinates.getLon());
+        currentLocalization.setText(currentWeatherData.getName() + ", " + forecastWeatherData.getCityObject().getCountry());
         actualTempLeft.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
         tempFeelLeft.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
         pressureLeft.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");

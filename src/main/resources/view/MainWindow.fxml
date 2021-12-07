@@ -37,7 +37,15 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="currentLocalization" alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" layoutY="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+                  <Label fx:id="forecastLabelLeft" alignment="CENTER" layoutX="3.0" layoutY="295.0" text="Prognoza" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="295.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="8.0" right="8.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="currentLocalization" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
@@ -47,6 +55,7 @@
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </Label>
+                  <Label fx:id="coordinatesLeft" alignment="CENTER" layoutY="75.0" prefHeight="17.0" prefWidth="750.0" text="długość: 0 szerokość: 0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0" />
                   <Label fx:id="tempFeelLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="171.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="165.0">
                      <font>
                         <Font size="16.0" />
@@ -57,20 +66,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="295.0" text="Prognoza" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="295.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </Label>
                   <Label fx:id="pressureLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="189.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="actualizationInfoLeft" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="530.0" text="Aktualizuję dane..." visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                  <Label fx:id="actualizationInfoLeft" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="530.0" text="Aktualizuję dane..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                      <padding>
                         <Insets left="8.0" right="8.0" />
                      </padding>

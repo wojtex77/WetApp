@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class ForecastWeatherData {
     private JsonObject city;
     private JsonArray list; //contains list of weather forecast for next days
+    public City cityObject;
+
     private int cnt;
 
     private ArrayList<ForecastWeatherValues> forecast = new ArrayList<ForecastWeatherValues>();
@@ -30,7 +32,9 @@ public class ForecastWeatherData {
         return list;
     }
 
-
+    public City getCityObject() {
+        return cityObject;
+    }
 
     public void convertListToArrayOfObjects(){
 
@@ -41,6 +45,14 @@ public class ForecastWeatherData {
             object.convertWeatherToObject();
             forecast.add(object);
         }
+
+    }
+
+
+    public void convertCityToObject(){
+
+        Gson gson = new Gson();
+        cityObject = gson.fromJson(this.city, City.class);
 
     }
 
