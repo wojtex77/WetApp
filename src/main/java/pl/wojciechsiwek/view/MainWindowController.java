@@ -235,6 +235,14 @@ public class MainWindowController extends BaseController {
         hummidity1Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(0).getHumidity() + " %");
         description1Left.setText(forecastWeatherDataLeft.getForecast().get(0).getDescription().getDescription());
 
+        date1Right.setText(formatershort1.format(date));
+        temp1Right.setText("dzień: " + forecastWeatherDataRight.getForecast().get(0).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp1NightRight.setText("noc: " + forecastWeatherDataRight.getForecast().get(0).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure1Right.setText("ciśnienie: " + forecastWeatherDataRight.getForecast().get(0).getPressure() + " hPa");
+        hummidity1Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(0).getHumidity() + " %");
+        hummidity1Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(0).getHumidity() + " %");
+        description1Right.setText(forecastWeatherDataRight.getForecast().get(0).getDescription().getDescription());
+
 
 // second day data
         SimpleDateFormat formatershort2 = new SimpleDateFormat("dd.MM.yy");
@@ -250,6 +258,14 @@ public class MainWindowController extends BaseController {
         hummidity2Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(1).getHumidity() + " %");
         hummidity2Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(1).getHumidity() + " %");
         description2Left.setText(forecastWeatherDataLeft.getForecast().get(1).getDescription().getDescription());
+
+        date2Right.setText(formatershort2.format(date));
+        temp2Right.setText("dzień: " + forecastWeatherDataRight.getForecast().get(1).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp2NightRight.setText("noc: " + forecastWeatherDataRight.getForecast().get(1).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure2Right.setText("ciśnienie: " + forecastWeatherDataRight.getForecast().get(1).getPressure() + " hPa");
+        hummidity2Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(1).getHumidity() + " %");
+        hummidity2Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(1).getHumidity() + " %");
+        description2Right.setText(forecastWeatherDataRight.getForecast().get(1).getDescription().getDescription());
 
 
 // third day data
@@ -267,6 +283,14 @@ public class MainWindowController extends BaseController {
         hummidity3Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(2).getHumidity() + " %");
         description3Left.setText(forecastWeatherDataLeft.getForecast().get(2).getDescription().getDescription());
 
+        date3Right.setText(formatershort3.format(date));
+        temp3Right.setText("dzień: " + forecastWeatherDataRight.getForecast().get(2).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp3NightRight.setText("noc: " + forecastWeatherDataRight.getForecast().get(2).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure3Right.setText("ciśnienie: " + forecastWeatherDataRight.getForecast().get(2).getPressure() + " hPa");
+        hummidity3Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(2).getHumidity() + " %");
+        hummidity3Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(2).getHumidity() + " %");
+        description3Right.setText(forecastWeatherDataRight.getForecast().get(2).getDescription().getDescription());
+
 
 // fourth day data
         SimpleDateFormat formatershort4 = new SimpleDateFormat("dd.MM.yy");
@@ -283,6 +307,14 @@ public class MainWindowController extends BaseController {
         hummidity4Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(3).getHumidity() + " %");
         description4Left.setText(forecastWeatherDataLeft.getForecast().get(3).getDescription().getDescription());
 
+        date4Right.setText(formatershort4.format(date));
+        temp4Right.setText("dzień: " + forecastWeatherDataRight.getForecast().get(3).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp4NightRight.setText("noc: " + forecastWeatherDataRight.getForecast().get(3).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure4Right.setText("ciśnienie: " + forecastWeatherDataRight.getForecast().get(3).getPressure() + " hPa");
+        hummidity4Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(3).getHumidity() + " %");
+        hummidity4Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(3).getHumidity() + " %");
+        description4Right.setText(forecastWeatherDataRight.getForecast().get(3).getDescription().getDescription());
+
 // fifth day data
         SimpleDateFormat formatershort5 = new SimpleDateFormat("dd.MM.yy");
 
@@ -297,6 +329,14 @@ public class MainWindowController extends BaseController {
         hummidity5Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(4).getHumidity() + " %");
         hummidity5Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(4).getHumidity() + " %");
         description5Left.setText(forecastWeatherDataLeft.getForecast().get(4).getDescription().getDescription());
+
+        date5Right.setText(formatershort5.format(date));
+        temp5Right.setText("dzień: " + forecastWeatherDataRight.getForecast().get(4).getTemperatures().getDay() + " " + (char) 176 + "C");
+        temp5NightRight.setText("noc: " + forecastWeatherDataRight.getForecast().get(4).getTemperatures().getNight() + " " + (char) 176 + "C");
+        pressure5Right.setText("ciśnienie: " + forecastWeatherDataRight.getForecast().get(4).getPressure() + " hPa");
+        hummidity5Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(4).getHumidity() + " %");
+        hummidity5Right.setText("wilgotność: " + forecastWeatherDataRight.getForecast().get(4).getHumidity() + " %");
+        description5Right.setText(forecastWeatherDataRight.getForecast().get(4).getDescription().getDescription());
 
     }
 }
