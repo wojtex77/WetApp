@@ -29,41 +29,41 @@ public class MainWindowController extends BaseController {
     private Button refreshButton;
 
     @FXML
-    private Label currentLocalization;
+    private Label currentLocalization, secondLocalization;
 
     @FXML
-    private Label coordinatesLeft;
+    private Label coordinatesLeft, coordinatesRight;
 
     @FXML
-    private Label forecastLabelLeft;
+    private Label forecastLabelLeft, forecastLabelRight;
 
     @FXML
     private Label leftHeader;
 
     @FXML
-    private Label actualTempLeft;
+    private Label actualTempLeft, actualTempRight;
 
     @FXML
-    private Label actualWeathCondLeft;
+    private Label actualWeathCondLeft, actualWeathCondRight;
 
     @FXML
     private MenuItem exitButton;
 
     @FXML
-    private Label actualizationInfoLeft;
+    private Label actualizationInfoLeft, actualizationInfoRight;
 
     @FXML
-    private Label tempFeelLeft;
+    private Label tempFeelLeft, tempFeelRight;
 
     @FXML
-    private Label pressureLeft;
+    private Label pressureLeft, pressureRight;
 
     @FXML
     private SplitPane splitPane;
 
 
     @FXML
-    private TextField localizationInputLeft;
+    private TextField localizationInputLeft, localizationInputRight;
 
 
     @FXML
@@ -80,6 +80,22 @@ public class MainWindowController extends BaseController {
 
     @FXML
     private Label date5Left, temp5left, temp5NightLeft, pressure5Left, hummidity5Left, description5Left;
+
+
+    @FXML
+    private Label date1Right, temp1Right, temp1NightRight, pressure1Right, hummidity1Right, description1Right;
+
+    @FXML
+    private Label date2Right, temp2Right, temp2NightRight, pressure2Right, hummidity2Right, description2Right;
+
+    @FXML
+    private Label date3Right, temp3Right, temp3NightRight, pressure3Right, hummidity3Right, description3Right;
+
+    @FXML
+    private Label date4Right, temp4Right, temp4NightRight, pressure4Right, hummidity4Right, description4Right;
+
+    @FXML
+    private Label date5Right, temp5Right, temp5NightRight, pressure5Right, hummidity5Right, description5Right;
 
 
 
