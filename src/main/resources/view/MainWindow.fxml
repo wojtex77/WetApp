@@ -22,8 +22,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Informacje">
             <items>
-              <MenuItem mnemonicParsing="false" text="O programie" />
                   <MenuItem mnemonicParsing="false" text="O autorze" />
+              <MenuItem mnemonicParsing="false" onAction="#aboutProgramAction" text="O programie" />
             </items>
           </Menu>
         </menus>
@@ -332,8 +332,8 @@
         </items>
       </SplitPane>
       <Label layoutX="14.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="39.0" />
-      <TextField fx:id="localizationInputLeft" layoutX="88.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" promptText="np. Warszawa, pl" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="35.0" />
-      <Label layoutX="985.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:" />
-      <TextField fx:id="localizationInputRight" layoutX="1059.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" promptText="np. Warszawa, pl" />
+      <TextField fx:id="localizationInputLeft" layoutX="88.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" promptText="np. Warszawa" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="35.0" />
+      <Label layoutX="985.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:" AnchorPane.rightAnchor="434.0" AnchorPane.topAnchor="39.0" />
+      <TextField fx:id="localizationInputRight" layoutX="1059.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" promptText="np. Tokio" AnchorPane.rightAnchor="249.0" AnchorPane.topAnchor="35.0" />
    </children>
 </AnchorPane>

@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
@@ -24,14 +25,23 @@ public class ViewFactory {
     public void showMainWindow() {
         System.out.println("Main window method called");
 
-        BaseController controller = new MainWindowController(weatherManager, this, "/view/MainWindow.fxml");
-        initializeStage(controller);
+        BaseController mainWindowController = new MainWindowController(weatherManager, this, "/view/MainWindow.fxml");
+        initializeStage(mainWindowController, "WetApp - aplikacja pogodowa", false);
+
+
+    }
+
+    public void showAboutProgramWindow() {
+        System.out.println("About program method called");
+
+        BaseController controller = new AboutController(weatherManager, this, "/view/About.fxml");
+        initializeStage(controller, "WetApp - O programie", true);
 
 
     }
 
 
-    private void initializeStage(BaseController controller) {
+    private void initializeStage(BaseController controller, String windowTitle, Boolean modal) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(controller.getFxmlName())));
         fxmlLoader.setController(controller);
@@ -47,7 +57,7 @@ public class ViewFactory {
 
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("WetApp");
+        stage.setTitle(windowTitle);
 
         //setting logo
         Path currentRelativePath = Paths.get("");
@@ -57,7 +67,12 @@ public class ViewFactory {
 
 
         stage.setResizable(true);
-        stage.show();
+        if (modal){
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        }
+        else stage.show();
 
     }
 
