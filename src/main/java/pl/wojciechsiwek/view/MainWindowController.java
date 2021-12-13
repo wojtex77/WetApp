@@ -121,96 +121,131 @@ public class MainWindowController extends BaseController {
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         super(weatherManager, viewFactory, fxmlName);
-
+        this.isTextLeft = false;
+        this.isTextRight = false;
     }
 
+
+    private boolean isTextLeft, isTextRight;
 
     @FXML
     void exitProgramAction() {
         System.out.println("Exit program action called");
         Stage stage = (Stage) actualWeathCondLeft.getScene().getWindow();
         viewFactory.closeStage(stage);
-
     }
 
     @FXML
     void refreshDataAction() {
         System.out.println("Data refreshing");
 
-        GetWeatherDataService getDataServiceLeft = new GetWeatherDataService(weatherManager, localizationInputLeft.getText(), "left");
-        GetWeatherDataService getDataServiceRight = new GetWeatherDataService(weatherManager, localizationInputRight.getText(), "right");
-        getDataServiceLeft.start();
-        actualizationInfoLeft.setText("Aktualizuję dane...");
-        actualizationInfoLeft.setVisible(true);
-        getDataServiceRight.start();
-        actualizationInfoRight.setText("Aktualizuję dane...");
-        actualizationInfoRight.setVisible(true);
+        this.checkInputFilling();
 
-        getDataServiceLeft.setOnSucceeded(event -> {
-            WeatherDataResult weatherDataResult = (WeatherDataResult) getDataServiceLeft.getValue();
+        if (this.isTextLeft){
+            GetWeatherDataService getDataServiceLeft = new GetWeatherDataService(weatherManager, localizationInputLeft.getText(), "left");
+            getDataServiceLeft.start();
+            actualizationInfoLeft.setText("Aktualizuję dane...");
+            actualizationInfoLeft.setVisible(true);
 
-            switch (weatherDataResult) {
-                case SUCCESS: {
-                    System.out.println("Data refreshing done");
-                    this.updateDataLeft();
-                    break;
+            getDataServiceLeft.setOnSucceeded(event -> {
+                WeatherDataResult weatherDataResult = (WeatherDataResult) getDataServiceLeft.getValue();
 
-                }
-                case FAILED: {
-                    System.out.println("Data refreshing failed");
-                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się");
-                    break;
-                }
-                case FAILED_NO_LOCATION_FOUND: {
-                    System.out.println("No location found");
-                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
-                    break;
-                }
-                case FAILED_BY_TOO_MANY_CONNECTIONS: {
-                    System.out.println("Too many connections");
-                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
-                    break;
-                }
-                case FAILED_WRONG_KEY: {
-                    System.out.println("Incorrect API key");
-                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
-                    break;
-                }
-            }
-        });
+                switch (weatherDataResult) {
+                    case SUCCESS: {
+                        System.out.println("Data refreshing done");
+                        this.updateDataLeft();
+                        break;
 
-        getDataServiceRight.setOnSucceeded(event -> {
-            WeatherDataResult weatherDataResult = (WeatherDataResult) getDataServiceRight.getValue();
+                    }
+                    case FAILED: {
+                        System.out.println("Data refreshing failed");
+                        actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się");
+                        break;
+                    }
+                    case FAILED_NO_LOCATION_FOUND: {
+                        System.out.println("No location found");
+                        actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
+                        break;
+                    }
+                    case FAILED_BY_TOO_MANY_CONNECTIONS: {
+                        System.out.println("Too many connections");
+                        actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
+                        break;
+                    }
+                    case FAILED_WRONG_KEY: {
+                        System.out.println("Incorrect API key");
+                        actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
+                        break;
+                    }
+                }
+            });
+        }
+        else {
+            actualizationInfoLeft.setText("Pole miejscowości nie może być puste");
+            actualizationInfoLeft.setVisible(true);
+        }
 
-            switch (weatherDataResult) {
-                case SUCCESS: {
-                    System.out.println("Data refreshing done");
-                    this.updateDataRight();
-                    break;
+        if (this.isTextRight){
+            GetWeatherDataService getDataServiceRight = new GetWeatherDataService(weatherManager, localizationInputRight.getText(), "right");
+            getDataServiceRight.start();
+            actualizationInfoRight.setText("Aktualizuję dane...");
+            actualizationInfoRight.setVisible(true);
 
+            getDataServiceRight.setOnSucceeded(event -> {
+                WeatherDataResult weatherDataResult = (WeatherDataResult) getDataServiceRight.getValue();
+
+                switch (weatherDataResult) {
+                    case SUCCESS: {
+                        System.out.println("Data refreshing done");
+                        this.updateDataRight();
+                        break;
+
+                    }
+                    case FAILED: {
+                        System.out.println("Data refreshing failed");
+                        actualizationInfoRight.setText("Aktualizacja danych nie powiodła się");
+                        break;
+                    }
+                    case FAILED_NO_LOCATION_FOUND: {
+                        System.out.println("No location found");
+                        actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
+                        break;
+                    }
+                    case FAILED_BY_TOO_MANY_CONNECTIONS: {
+                        System.out.println("Too many connections");
+                        actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
+                        break;
+                    }
+                    case FAILED_WRONG_KEY: {
+                        System.out.println("Incorrect API key");
+                        actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
+                        break;
+                    }
                 }
-                case FAILED: {
-                    System.out.println("Data refreshing failed");
-                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się");
-                    break;
-                }
-                case FAILED_NO_LOCATION_FOUND: {
-                    System.out.println("No location found");
-                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
-                    break;
-                }
-                case FAILED_BY_TOO_MANY_CONNECTIONS: {
-                    System.out.println("Too many connections");
-                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
-                    break;
-                }
-                case FAILED_WRONG_KEY: {
-                    System.out.println("Incorrect API key");
-                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
-                    break;
-                }
-            }
-        });
+            });
+        }
+        else {
+            actualizationInfoRight.setText("Pole miejscowości nie może być puste");
+            actualizationInfoRight.setVisible(true);
+        }
+
+    }
+
+    private void checkInputFilling() {
+
+        if (localizationInputLeft.getText().equals("")) {
+            this.isTextLeft = false;
+        }
+        else {
+            this.isTextLeft = true;
+        }
+
+        if (localizationInputRight.getText().equals("")) {
+            this.isTextRight = false;
+        }
+        else {
+            this.isTextRight = true;
+        }
     }
 
     private void updateDataLeft() {
