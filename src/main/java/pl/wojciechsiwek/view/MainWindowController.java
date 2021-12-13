@@ -118,6 +118,7 @@ public class MainWindowController extends BaseController {
     @FXML
     private Label date5Right, temp5Right, temp5NightRight, pressure5Right, hummidity5Right, description5Right;
 
+    private boolean isTextLeft, isTextRight;
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         super(weatherManager, viewFactory, fxmlName);
@@ -125,8 +126,6 @@ public class MainWindowController extends BaseController {
         this.isTextRight = false;
     }
 
-
-    private boolean isTextLeft, isTextRight;
 
     @FXML
     void exitProgramAction() {
@@ -141,7 +140,7 @@ public class MainWindowController extends BaseController {
 
         this.checkInputFilling();
 
-        if (this.isTextLeft){
+        if (this.isTextLeft) {
             GetWeatherDataService getDataServiceLeft = new GetWeatherDataService(weatherManager, localizationInputLeft.getText(), "left");
             getDataServiceLeft.start();
             actualizationInfoLeft.setText("Aktualizuję dane...");
@@ -179,13 +178,12 @@ public class MainWindowController extends BaseController {
                     }
                 }
             });
-        }
-        else {
+        } else {
             actualizationInfoLeft.setText("Pole miejscowości nie może być puste");
             actualizationInfoLeft.setVisible(true);
         }
 
-        if (this.isTextRight){
+        if (this.isTextRight) {
             GetWeatherDataService getDataServiceRight = new GetWeatherDataService(weatherManager, localizationInputRight.getText(), "right");
             getDataServiceRight.start();
             actualizationInfoRight.setText("Aktualizuję dane...");
@@ -223,8 +221,7 @@ public class MainWindowController extends BaseController {
                     }
                 }
             });
-        }
-        else {
+        } else {
             actualizationInfoRight.setText("Pole miejscowości nie może być puste");
             actualizationInfoRight.setVisible(true);
         }
@@ -233,19 +230,9 @@ public class MainWindowController extends BaseController {
 
     private void checkInputFilling() {
 
-        if (localizationInputLeft.getText().equals("")) {
-            this.isTextLeft = false;
-        }
-        else {
-            this.isTextLeft = true;
-        }
+        this.isTextLeft = !localizationInputLeft.getText().equals("");
 
-        if (localizationInputRight.getText().equals("")) {
-            this.isTextRight = false;
-        }
-        else {
-            this.isTextRight = true;
-        }
+        this.isTextRight = !localizationInputRight.getText().equals("");
     }
 
     private void updateDataLeft() {
@@ -293,7 +280,6 @@ public class MainWindowController extends BaseController {
         hummidity1Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(0).getHumidity() + " %");
         hummidity1Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(0).getHumidity() + " %");
         description1Left.setText(forecastWeatherDataLeft.getForecast().get(0).getDescription().getDescription());
-
 
 
 // second day data

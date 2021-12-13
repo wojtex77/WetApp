@@ -3,18 +3,16 @@ package pl.wojciechsiwek.model;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 
 public class ForecastWeatherData {
+    public City cityObject;
     private JsonObject city;
     private JsonArray list; //contains list of weather forecast for next days
-    public City cityObject;
-
     private int cnt;
 
-    private ArrayList<ForecastWeatherValues> forecast = new ArrayList<ForecastWeatherValues>();
+    private final ArrayList<ForecastWeatherValues> forecast = new ArrayList<ForecastWeatherValues>();
 
     public int getCnt() {
         return cnt;
@@ -36,9 +34,9 @@ public class ForecastWeatherData {
         return cityObject;
     }
 
-    public void convertListToArrayOfObjects(){
+    public void convertListToArrayOfObjects() {
 
-        for (int i=0 ; i < this.cnt; i++){
+        for (int i = 0; i < this.cnt; i++) {
             Gson gson = new Gson();
             ForecastWeatherValues object = gson.fromJson(list.get(i), ForecastWeatherValues.class);
             object.convertTemperatures();
@@ -49,7 +47,7 @@ public class ForecastWeatherData {
     }
 
 
-    public void convertCityToObject(){
+    public void convertCityToObject() {
 
         Gson gson = new Gson();
         cityObject = gson.fromJson(this.city, City.class);

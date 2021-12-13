@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 
 public class City {
 
+    public Coordinates coordinates;
     private String country, name;
     private JsonObject coord;
-    public Coordinates coordinates;
 
     public String getCountry() {
         return country;
@@ -27,6 +27,6 @@ public class City {
 
     public void convertCoordinatesToObject() {
         Gson gson = new Gson();
-        coordinates = gson.fromJson(coord,Coordinates.class);
+        coordinates = gson.fromJson(coord, Coordinates.class);
     }
 }

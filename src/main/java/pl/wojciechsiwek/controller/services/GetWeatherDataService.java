@@ -39,7 +39,7 @@ public class GetWeatherDataService extends Service {
 
     private WeatherDataResult getWeatherData(String location, String whichPane) {
 
-        location = location.toLowerCase(Locale.ROOT).replace(",","%2C").replace(" ", "%20");
+        location = location.toLowerCase(Locale.ROOT).replace(",", "%2C").replace(" ", "%20");
         try {
             HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=" + location + "&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
@@ -52,7 +52,6 @@ public class GetWeatherDataService extends Service {
                     .asJson();
 
 
-
             this.currentStatus = currentWeatherResponse.getStatus();
             this.forecastStatus = forecastResponse.getStatus();
 
@@ -63,8 +62,7 @@ public class GetWeatherDataService extends Service {
                 if (this.whichPane == "left") {
                     weatherManager.currentDataLeft = currentWeatherResponse.getBody();
                     weatherManager.forecastDataLeft = forecastResponse.getBody();
-                }
-                else {
+                } else {
                     weatherManager.currentDataRight = currentWeatherResponse.getBody();
                     weatherManager.forecastDataRight = forecastResponse.getBody();
                 }
@@ -78,15 +76,12 @@ public class GetWeatherDataService extends Service {
             return WeatherDataResult.FAILED;
         }
 
-        if (this.currentStatus == 429 || this.forecastStatus == 429){
+        if (this.currentStatus == 429 || this.forecastStatus == 429) {
             return WeatherDataResult.FAILED_BY_TOO_MANY_CONNECTIONS;
-        }
-        else if (this.currentStatus == 404 || this.forecastStatus == 404){
+        } else if (this.currentStatus == 404 || this.forecastStatus == 404) {
             return WeatherDataResult.FAILED_NO_LOCATION_FOUND;
-        }
-        else if (this.currentStatus == 401 || this.forecastStatus == 401){
+        } else if (this.currentStatus == 401 || this.forecastStatus == 401) {
             return WeatherDataResult.FAILED_WRONG_KEY;
-        }
-        else return WeatherDataResult.FAILED;
+        } else return WeatherDataResult.FAILED;
     }
 }
