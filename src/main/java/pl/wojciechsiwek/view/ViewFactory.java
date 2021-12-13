@@ -56,7 +56,6 @@ public class ViewFactory {
         stage.getIcons().add(new Image("file:///" + pathToImg));
 
 
-
         stage.setResizable(true);
         stage.show();
 

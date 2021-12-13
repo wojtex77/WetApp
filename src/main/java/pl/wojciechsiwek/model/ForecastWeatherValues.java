@@ -5,13 +5,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public class ForecastWeatherValues {
-    private int pressure;
-    private int humidity;
+    private final int pressure;
+    private final int humidity;
     private JsonObject temp;
     private JsonArray weather; //contains list of weather forecast for next days
     private ForecastWeatherDescription description;
     private ForecastWeatherTemp temperatures;
 
+
+    public ForecastWeatherValues(int pressure, int humidity) {
+        this.pressure = pressure;
+        this.humidity = humidity;
+    }
 
     public ForecastWeatherDescription getDescription() {
         return description;
@@ -29,20 +34,14 @@ public class ForecastWeatherValues {
         return humidity;
     }
 
-
-    public ForecastWeatherValues(int pressure, int humidity) {
-        this.pressure = pressure;
-        this.humidity = humidity;
-    }
-
-    public void convertTemperatures(){
+    public void convertTemperatures() {
         Gson gson = new Gson();
         temperatures = gson.fromJson(temp, ForecastWeatherTemp.class);
     }
 
-    public void convertWeatherToObject(){
-            Gson gson = new Gson();
-            description = gson.fromJson(weather.get(0), ForecastWeatherDescription.class);
+    public void convertWeatherToObject() {
+        Gson gson = new Gson();
+        description = gson.fromJson(weather.get(0), ForecastWeatherDescription.class);
 
     }
 }
