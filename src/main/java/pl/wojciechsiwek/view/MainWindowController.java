@@ -60,6 +60,11 @@ public class MainWindowController extends BaseController {
     private MenuItem exitButton;
 
     @FXML
+    private MenuItem aboutProgramButton;
+
+
+
+    @FXML
     private Label actualizationInfoLeft;
 
     @FXML
@@ -132,6 +137,14 @@ public class MainWindowController extends BaseController {
         System.out.println("Exit program action called");
         Stage stage = (Stage) actualWeathCondLeft.getScene().getWindow();
         viewFactory.closeStage(stage);
+    }
+
+    @FXML
+    void aboutProgramAction() {
+        System.out.println("About program action called");
+
+        viewFactory.showAboutProgramWindow();
+
     }
 
     @FXML

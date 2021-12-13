@@ -22,8 +22,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Informacje">
             <items>
-              <MenuItem mnemonicParsing="false" text="O programie" />
                   <MenuItem mnemonicParsing="false" text="O autorze" />
+              <MenuItem mnemonicParsing="false" onAction="#aboutProgramAction" text="O programie" />
             </items>
           </Menu>
         </menus>

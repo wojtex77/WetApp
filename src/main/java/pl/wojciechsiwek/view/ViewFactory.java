@@ -24,7 +24,16 @@ public class ViewFactory {
     public void showMainWindow() {
         System.out.println("Main window method called");
 
-        BaseController controller = new MainWindowController(weatherManager, this, "/view/MainWindow.fxml");
+        BaseController mainWindowController = new MainWindowController(weatherManager, this, "/view/MainWindow.fxml");
+        initializeStage(mainWindowController);
+
+
+    }
+
+    public void showAboutProgramWindow() {
+        System.out.println("About program method called");
+
+        BaseController controller = new AboutController(weatherManager, this, "/view/About.fxml");
         initializeStage(controller);
 
 
