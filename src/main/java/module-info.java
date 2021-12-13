@@ -5,6 +5,7 @@ module WetApp {
     requires javafx.web;
     requires unirest.java;
     requires com.google.gson;
+    requires java.desktop;
 
     opens pl.wojciechsiwek;
     opens pl.wojciechsiwek.view;

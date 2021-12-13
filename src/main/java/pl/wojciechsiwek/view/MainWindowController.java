@@ -1,5 +1,11 @@
 package pl.wojciechsiwek.view;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+
+// ...
+
 import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,6 +17,7 @@ import pl.wojciechsiwek.controller.services.GetWeatherDataService;
 import pl.wojciechsiwek.model.CurrentWeatherData;
 import pl.wojciechsiwek.model.ForecastWeatherData;
 
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -61,6 +68,10 @@ public class MainWindowController extends BaseController {
 
     @FXML
     private MenuItem aboutProgramButton;
+
+
+    @FXML
+    private MenuItem aboutAuthorButton;
 
 
 
@@ -144,6 +155,18 @@ public class MainWindowController extends BaseController {
         System.out.println("About program action called");
 
         viewFactory.showAboutProgramWindow();
+
+    }
+
+
+    @FXML
+    void aboutAuthorAction() throws URISyntaxException, IOException {
+        System.out.println("About author action called");
+
+
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            Desktop.getDesktop().browse(new URI("http://www.wojciechsiwek.pl"));
+        }
 
     }
 
