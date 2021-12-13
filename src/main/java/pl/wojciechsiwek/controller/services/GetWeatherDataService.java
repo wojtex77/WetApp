@@ -16,6 +16,8 @@ public class GetWeatherDataService extends Service {
     String locationLeft;
     String locationRight;
 
+    Integer leftCurrentStatus, leftForecastStatus, rightCurrentStatus, rightForecastStatus;
+
     public GetWeatherDataService(WeatherManager weatherManager, String locationLeft, String locationRight) {
         this.weatherManager = weatherManager;
         this.locationLeft = locationLeft;
@@ -37,6 +39,7 @@ public class GetWeatherDataService extends Service {
     private WeatherDataResult getWeatherDataLeft(String locationLeft, String locationRight) {
 
         locationLeft = locationLeft.toLowerCase(Locale.ROOT).replace(",","%2C").replace(" ", "%20");
+        locationRight = locationRight.toLowerCase(Locale.ROOT).replace(",","%2C").replace(" ", "%20");
         try {
             HttpResponse<JsonNode> currentWeatherResponseLeft = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=" + locationLeft + "&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
@@ -60,6 +63,11 @@ public class GetWeatherDataService extends Service {
                     .asJson();
 
 
+            this.leftCurrentStatus = currentWeatherResponseLeft.getStatus();
+            this.leftForecastStatus = forecastResponseLeft.getStatus();
+            this.rightCurrentStatus = currentWeatherResponseRight.getStatus();
+            this.rightForecastStatus = forecastResponseRight.getStatus();
+
 
             System.out.println("Forecast left weather data response status: " + forecastResponseLeft.getStatus());
             System.out.println("Current left weather data response status: " + currentWeatherResponseLeft.getStatus());
@@ -75,10 +83,20 @@ public class GetWeatherDataService extends Service {
 
 
         } catch (Exception e) {
+
             e.printStackTrace();
             return WeatherDataResult.FAILED;
         }
 
-        return WeatherDataResult.FAILED;
+        if (this.leftCurrentStatus == 429 || this.leftForecastStatus == 429){
+            return WeatherDataResult.FAILED_BY_TOO_MANY_CONNECTIONS;
+        }
+        else if (this.leftCurrentStatus == 404 || this.leftForecastStatus == 404){
+            return WeatherDataResult.FAILED_NO_LOCATION_FOUND;
+        }
+        else if (this.leftCurrentStatus == 401 || this.leftForecastStatus == 401){
+            return WeatherDataResult.FAILED_WRONG_KEY;
+        }
+        else return WeatherDataResult.FAILED;
     }
 }

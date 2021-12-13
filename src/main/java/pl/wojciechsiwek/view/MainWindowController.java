@@ -3,11 +3,6 @@ package pl.wojciechsiwek.view;
 import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
@@ -124,12 +119,10 @@ public class MainWindowController extends BaseController {
     private Label date5Right, temp5Right, temp5NightRight, pressure5Right, hummidity5Right, description5Right;
 
 
-
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         super(weatherManager, viewFactory, fxmlName);
 
     }
-
 
 
     @FXML
@@ -143,33 +136,92 @@ public class MainWindowController extends BaseController {
     @FXML
     void refreshDataAction() {
         System.out.println("Data refreshing");
+
+        GetWeatherDataService getDataServiceLeft = new GetWeatherDataService(weatherManager, localizationInputLeft.getText(), localizationInputRight.getText());
+        GetWeatherDataService getDataServiceRight = new GetWeatherDataService(weatherManager, localizationInputLeft.getText(), localizationInputRight.getText());
+        getDataServiceLeft.start();
         actualizationInfoLeft.setText("Aktualizuję dane...");
         actualizationInfoLeft.setVisible(true);
+        getDataServiceRight.start();
+        actualizationInfoRight.setText("Aktualizuję dane...");
+        actualizationInfoRight.setVisible(true);
 
-        GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager,localizationInputLeft.getText(), localizationInputRight.getText());
-        getDataService.start();
-        getDataService.setOnSucceeded(event -> {
-            WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
+        getDataServiceLeft.setOnSucceeded(event -> {
+            WeatherDataResult weatherDataResult = (WeatherDataResult) getDataServiceLeft.getValue();
 
             switch (weatherDataResult) {
                 case SUCCESS: {
                     System.out.println("Data refreshing done");
                     this.updateData();
-
-
                     break;
 
                 }
-                case FAILED:
+                case FAILED: {
                     System.out.println("Data refreshing failed");
                     actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się");
                     actualizationInfoRight.setText("Aktualizacja danych nie powiodła się");
                     break;
+                }
+                case FAILED_NO_LOCATION_FOUND: {
+                    System.out.println("No location found");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
+                    break;
+                }
+                case FAILED_BY_TOO_MANY_CONNECTIONS: {
+                    System.out.println("Too many connections");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
+                    break;
+                }
+                case FAILED_WRONG_KEY: {
+                    System.out.println("Incorrect API key");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
+                    break;
+                }
+            }
+        });
+
+        getDataServiceRight.setOnSucceeded(event -> {
+            WeatherDataResult weatherDataResult = (WeatherDataResult) getDataServiceLeft.getValue();
+
+            switch (weatherDataResult) {
+                case SUCCESS: {
+                    System.out.println("Data refreshing done");
+                    this.updateData();
+                    break;
+
+                }
+                case FAILED: {
+                    System.out.println("Data refreshing failed");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się");
+                    break;
+                }
+                case FAILED_NO_LOCATION_FOUND: {
+                    System.out.println("No location found");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
+                    break;
+                }
+                case FAILED_BY_TOO_MANY_CONNECTIONS: {
+                    System.out.println("Too many connections");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
+                    break;
+                }
+                case FAILED_WRONG_KEY: {
+                    System.out.println("Incorrect API key");
+                    actualizationInfoLeft.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
+                    actualizationInfoRight.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
+                    break;
+                }
             }
         });
     }
 
-    private void updateData(){
+    private void updateData() {
         //getting date for info when last actualization was
         Date date = new Date();
         SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
