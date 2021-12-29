@@ -60,11 +60,11 @@ public class GetWeatherDataService extends Service {
             System.out.println("Current " + this.whichPane + " weather data response status: " + currentWeatherResponse.getStatus());
             if ((forecastResponse.getStatus() == 200) && (currentWeatherResponse.getStatus() == 200)) {
                 if (this.whichPane == "left") {
-                    weatherManager.currentDataLeft = currentWeatherResponse.getBody();
-                    weatherManager.forecastDataLeft = forecastResponse.getBody();
+                    weatherManager.setCurrentDataLeft(currentWeatherResponse.getBody());
+                    weatherManager.setForecastDataLeft(forecastResponse.getBody());
                 } else {
-                    weatherManager.currentDataRight = currentWeatherResponse.getBody();
-                    weatherManager.forecastDataRight = forecastResponse.getBody();
+                    weatherManager.setCurrentDataRight(currentWeatherResponse.getBody());
+                    weatherManager.setForecastDataRight(forecastResponse.getBody());
                 }
                 return WeatherDataResult.SUCCESS;
             }

@@ -280,12 +280,12 @@ public class MainWindowController extends BaseController {
 
         //converting current weather json to object
         Gson currentDataJSON = new Gson();
-        CurrentWeatherData currentWeatherDataLeft = currentDataJSON.fromJson(String.valueOf(weatherManager.currentDataLeft), CurrentWeatherData.class);
+        CurrentWeatherData currentWeatherDataLeft = currentDataJSON.fromJson(String.valueOf(weatherManager.getCurrentDataLeft()), CurrentWeatherData.class);
         currentWeatherDataLeft.convertMainToObject();
 
         //converting forecast weather json to object
         Gson forecastDataLeft = new Gson();
-        ForecastWeatherData forecastWeatherDataLeft = forecastDataLeft.fromJson(String.valueOf(weatherManager.forecastDataLeft), ForecastWeatherData.class);
+        ForecastWeatherData forecastWeatherDataLeft = forecastDataLeft.fromJson(String.valueOf(weatherManager.getForecastDataLeft()), ForecastWeatherData.class);
 
         forecastWeatherDataLeft.convertListToArrayOfObjects();
         forecastWeatherDataLeft.convertCityToObject();
@@ -390,13 +390,13 @@ public class MainWindowController extends BaseController {
 
         //converting current weather json to object
         Gson currentDataJSON = new Gson();
-        CurrentWeatherData currentWeatherDataRight = currentDataJSON.fromJson(String.valueOf(weatherManager.currentDataRight), CurrentWeatherData.class);
+        CurrentWeatherData currentWeatherDataRight = currentDataJSON.fromJson(String.valueOf(weatherManager.getCurrentDataRight()), CurrentWeatherData.class);
         currentWeatherDataRight.convertMainToObject();
 
         //converting forecast weather json to object
 
         Gson forecastDataRight = new Gson();
-        ForecastWeatherData forecastWeatherDataRight = forecastDataRight.fromJson(String.valueOf(weatherManager.forecastDataRight), ForecastWeatherData.class);
+        ForecastWeatherData forecastWeatherDataRight = forecastDataRight.fromJson(String.valueOf(weatherManager.getForecastDataRight()), ForecastWeatherData.class);
         forecastWeatherDataRight.convertListToArrayOfObjects();
         forecastWeatherDataRight.convertCityToObject();
         forecastWeatherDataRight.cityObject.convertCoordinatesToObject();
