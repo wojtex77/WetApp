@@ -75,111 +75,11 @@
                         <Insets left="8.0" right="8.0" />
                      </padding>
                   </Label>
-                  <AnchorPane layoutY="379.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="350.0">
-                     <children>
-                        <Label fx:id="temp1left" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="temp1NightLeft" alignment="CENTER" contentDisplay="CENTER" layoutY="52.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
-                        <Label fx:id="pressure1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-                        <Label fx:id="hummidity1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="79.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                        <Label fx:id="description1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="date1Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="62.0" prefHeight="17.0" prefWidth="117.0" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </AnchorPane>
-                  <AnchorPane layoutX="139.0" layoutY="379.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="350.0">
-                     <children>
-                        <Label fx:id="temp2left" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="temp2NightLeft" alignment="CENTER" contentDisplay="CENTER" layoutY="52.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
-                        <Label fx:id="pressure2Left" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-                        <Label fx:id="hummidity2Left" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="79.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                        <Label fx:id="description2Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="date2Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="62.0" prefHeight="17.0" prefWidth="117.0" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </AnchorPane>
-                  <AnchorPane layoutX="307.0" layoutY="379.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="350.0">
-                     <children>
-                        <Label fx:id="temp3left" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="temp3NightLeft" alignment="CENTER" contentDisplay="CENTER" layoutY="52.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
-                        <Label fx:id="pressure3Left" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-                        <Label fx:id="hummidity3Left" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="79.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                        <Label fx:id="description3Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="date3Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="62.0" prefHeight="17.0" prefWidth="117.0" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </AnchorPane>
-                  <AnchorPane layoutX="480.0" layoutY="379.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="350.0">
-                     <children>
-                        <Label fx:id="temp4left" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="temp4NightLeft" alignment="CENTER" contentDisplay="CENTER" layoutY="52.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
-                        <Label fx:id="pressure4Left" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-                        <Label fx:id="hummidity4Left" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="79.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                        <Label fx:id="description4Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="date4Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="62.0" prefHeight="17.0" prefWidth="117.0" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </AnchorPane>
-                  <AnchorPane layoutX="613.0" layoutY="379.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="350.0">
-                     <children>
-                        <Label fx:id="temp5left" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="temp5NightLeft" alignment="CENTER" contentDisplay="CENTER" layoutY="52.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
-                        <Label fx:id="pressure5Left" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-                        <Label fx:id="hummidity5Left" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="79.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                        <Label fx:id="description5Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="date5Left" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="62.0" prefHeight="17.0" prefWidth="117.0" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
-                     </children>
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </AnchorPane>
+                  <fx:include fx:id="firstLeft" layoutY="379.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="350.0" />
+                  <fx:include fx:id="secondLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="350.0" />
+                  <fx:include fx:id="thirdLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="350.0" />
+                  <fx:include fx:id="fourthLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="350.0" />
+                  <fx:include fx:id="fifthLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="350.0" />
                </children></AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>

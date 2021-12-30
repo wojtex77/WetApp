@@ -8,6 +8,7 @@ import java.net.URI;
 
 import com.google.gson.Gson;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pl.wojciechsiwek.WeatherManager;
@@ -102,22 +103,11 @@ public class MainWindowController extends BaseController {
     @FXML
     private TextField localizationInputLeft;
 
+    @FXML
+    private Parent firstLeft, secondLeft, thirdLeft, fourthLeft, fifthLeft; //embeddedElement
 
     @FXML
-    private Label date1Left, temp1left, temp1NightLeft, pressure1Left, hummidity1Left, description1Left;
-
-    @FXML
-    private Label date2Left, temp2left, temp2NightLeft, pressure2Left, hummidity2Left, description2Left;
-
-    @FXML
-    private Label date3Left, temp3left, temp3NightLeft, pressure3Left, hummidity3Left, description3Left;
-
-    @FXML
-    private Label date4Left, temp4left, temp4NightLeft, pressure4Left, hummidity4Left, description4Left;
-
-    @FXML
-    private Label date5Left, temp5left, temp5NightLeft, pressure5Left, hummidity5Left, description5Left;
-
+    private SingleDayController firstLeftController, secondLeftController, thirdLeftController, fourthLeftController, fifthLeftController;
 
     @FXML
     private Label date1Right, temp1Right, temp1NightRight, pressure1Right, hummidity1Right, description1Right;
@@ -301,83 +291,40 @@ public class MainWindowController extends BaseController {
         actualWeathCondLeft.setText(currentWeatherDataLeft.mainWeatherData.getDescription());
 
 
-// first day data
-        SimpleDateFormat formatershort1 = new SimpleDateFormat("dd.MM.yy");
-
+        int i =0;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
+
+// first day data
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-
-        date1Left.setText(formatershort1.format(date));
-        temp1left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(0).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp1NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(0).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure1Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(0).getPressure() + " hPa");
-        hummidity1Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(0).getHumidity() + " %");
-        hummidity1Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(0).getHumidity() + " %");
-        description1Left.setText(forecastWeatherDataLeft.getForecast().get(0).getDescription().getDescription());
-
+        firstLeftController.updateData(date, forecastWeatherDataLeft,i);
+        i++;
 
 // second day data
-        SimpleDateFormat formatershort2 = new SimpleDateFormat("dd.MM.yy");
-
-        calendar.setTime(date);
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-
-        date2Left.setText(formatershort2.format(date));
-        temp2left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(1).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp2NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(1).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure2Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(1).getPressure() + " hPa");
-        hummidity2Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(1).getHumidity() + " %");
-        hummidity2Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(1).getHumidity() + " %");
-        description2Left.setText(forecastWeatherDataLeft.getForecast().get(1).getDescription().getDescription());
+        secondLeftController.updateData(date, forecastWeatherDataLeft,i);
+        i++;
 
 
 // third day data
-        SimpleDateFormat formatershort3 = new SimpleDateFormat("dd.MM.yy");
-
-        calendar.setTime(date);
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-
-        date3Left.setText(formatershort3.format(date));
-        temp3left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(2).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp3NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(2).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure3Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(2).getPressure() + " hPa");
-        hummidity3Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(2).getHumidity() + " %");
-        hummidity3Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(2).getHumidity() + " %");
-        description3Left.setText(forecastWeatherDataLeft.getForecast().get(2).getDescription().getDescription());
+        thirdLeftController.updateData(date, forecastWeatherDataLeft,i);
+        i++;
 
 // fourth day data
-        SimpleDateFormat formatershort4 = new SimpleDateFormat("dd.MM.yy");
-
-        calendar.setTime(date);
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-
-        date4Left.setText(formatershort4.format(date));
-        temp4left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(3).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp4NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(3).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure4Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(3).getPressure() + " hPa");
-        hummidity4Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(3).getHumidity() + " %");
-        hummidity4Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(3).getHumidity() + " %");
-        description4Left.setText(forecastWeatherDataLeft.getForecast().get(3).getDescription().getDescription());
+        fourthLeftController.updateData(date, forecastWeatherDataLeft,i);
+        i++;
 
 // fifth day data
-        SimpleDateFormat formatershort5 = new SimpleDateFormat("dd.MM.yy");
-
-        calendar.setTime(date);
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-
-        date5Left.setText(formatershort5.format(date));
-        temp5left.setText("dzień: " + forecastWeatherDataLeft.getForecast().get(4).getTemperatures().getDay() + " " + (char) 176 + "C");
-        temp5NightLeft.setText("noc: " + forecastWeatherDataLeft.getForecast().get(4).getTemperatures().getNight() + " " + (char) 176 + "C");
-        pressure5Left.setText("ciśnienie: " + forecastWeatherDataLeft.getForecast().get(4).getPressure() + " hPa");
-        hummidity5Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(4).getHumidity() + " %");
-        hummidity5Left.setText("wilgotność: " + forecastWeatherDataLeft.getForecast().get(4).getHumidity() + " %");
-        description5Left.setText(forecastWeatherDataLeft.getForecast().get(4).getDescription().getDescription());
+        fifthLeftController.updateData(date, forecastWeatherDataLeft,i);
+        i++;
 
     }
 
