@@ -103,11 +103,16 @@ public class MainWindowController extends BaseController {
     @FXML
     private TextField localizationInputLeft;
 
+
+    //left side forecast
     @FXML
     private Parent firstLeft, secondLeft, thirdLeft, fourthLeft, fifthLeft; //embeddedElement
 
     @FXML
     private SingleDayController firstLeftController, secondLeftController, thirdLeftController, fourthLeftController, fifthLeftController;
+
+
+
 
     @FXML
     private Label date1Right, temp1Right, temp1NightRight, pressure1Right, hummidity1Right, description1Right;
@@ -124,12 +129,9 @@ public class MainWindowController extends BaseController {
     @FXML
     private Label date5Right, temp5Right, temp5NightRight, pressure5Right, hummidity5Right, description5Right;
 
-    private boolean isTextLeft, isTextRight;
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         super(weatherManager, viewFactory, fxmlName);
-        this.isTextLeft = false;
-        this.isTextRight = false;
     }
 
 
@@ -164,9 +166,9 @@ public class MainWindowController extends BaseController {
     void refreshDataAction() {
         System.out.println("Data refreshing");
 
-        this.checkInputFilling();
 
-        if (this.isTextLeft) {
+
+        if (checkInputFilling("left")) {
             GetWeatherDataService getDataServiceLeft = new GetWeatherDataService(weatherManager, localizationInputLeft.getText(), "left");
             getDataServiceLeft.start();
             actualizationInfoLeft.setText("Aktualizuję dane...");
@@ -209,7 +211,7 @@ public class MainWindowController extends BaseController {
             actualizationInfoLeft.setVisible(true);
         }
 
-        if (this.isTextRight) {
+        if (checkInputFilling("right")) {
             GetWeatherDataService getDataServiceRight = new GetWeatherDataService(weatherManager, localizationInputRight.getText(), "right");
             getDataServiceRight.start();
             actualizationInfoRight.setText("Aktualizuję dane...");
@@ -254,12 +256,14 @@ public class MainWindowController extends BaseController {
 
     }
 
-    private void checkInputFilling() {
-
-        this.isTextLeft = !localizationInputLeft.getText().equals("");
-
-        this.isTextRight = !localizationInputRight.getText().equals("");
+    private boolean checkInputFilling(String whichInput) {
+        if (whichInput.equals("left"))
+            return !localizationInputLeft.getText().equals("");
+        else if (whichInput.equals("right"))
+            return !localizationInputRight.getText().equals("");
+        else return false;
     }
+
 
     private void updateDataLeft() {
         //getting date for info when last actualization was
