@@ -48,7 +48,6 @@ public class SingleLocationController {
     private SingleDayController firstDayController, secondDayController, thirdDayController, fourthDayController, fifthDayController;
 
     private String whichPane;
-
     private CurrentWeatherData currentWeatherData;
     private ForecastWeatherData forecastWeatherData;
 
@@ -57,8 +56,7 @@ public class SingleLocationController {
         this.whichPane = whichPane;
         GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager, location, whichPane);
         getDataService.start();
-        actualizationInfo.setText("Aktualizuję dane...");
-        actualizationInfo.setVisible(true);
+        setActualizationInfo("Aktualizuję dane...");
 
         getDataService.setOnSucceeded(event -> {
             WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
@@ -95,12 +93,61 @@ public class SingleLocationController {
     }
 
     private void updateData(WeatherManager weatherManager) {
-        //getting date for info when last actualization was
-        Date date = new Date();
-        SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        Date date = getAndShowActualDate();
+        convertJsonToObjects(weatherManager);
+        setActualConditions();
+        setForecastConditions(date);
+    }
 
-        actualizationInfo.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
+    private void setForecastConditions(Date date) {
+        int i = 0;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
+        // first day data
+        calendar.add(Calendar.DATE, 1);
+        date = calendar.getTime();
+        firstDayController.updateData(date, forecastWeatherData, i);
+        i++;
+
+        // second day data
+        calendar.add(Calendar.DATE, 1);
+        date = calendar.getTime();
+        secondDayController.updateData(date, forecastWeatherData, i);
+        i++;
+
+
+        // third day data
+        calendar.add(Calendar.DATE, 1);
+        date = calendar.getTime();
+        thirdDayController.updateData(date, forecastWeatherData, i);
+        i++;
+
+        // fourth day data
+        calendar.add(Calendar.DATE, 1);
+        date = calendar.getTime();
+        fourthDayController.updateData(date, forecastWeatherData, i);
+        i++;
+
+        // fifth day data
+        calendar.add(Calendar.DATE, 1);
+        date = calendar.getTime();
+        fifthDayController.updateData(date, forecastWeatherData, i);
+        i++;
+    }
+
+    private void setActualConditions() {
+        forecastLabel.setVisible(true);
+        coordinates.setText("Szerokość: " + forecastWeatherData.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherData.cityObject.coordinates.getLon());
+        coordinates.setVisible(true);
+        currentLocation.setText(currentWeatherData.getName() + ", " + forecastWeatherData.getCityObject().getCountry());
+        actualTemp.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
+        tempFeel.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
+        pressure.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");
+        actualWeathCond.setText(currentWeatherData.mainWeatherData.getDescription());
+    }
+
+    private void convertJsonToObjects(WeatherManager weatherManager) {
         //converting current weather json to object
         Gson gson = new Gson();
         if (whichPane.equals("left")) {
@@ -110,59 +157,18 @@ public class SingleLocationController {
             currentWeatherData = gson.fromJson(String.valueOf(weatherManager.getCurrentDataRight()), CurrentWeatherData.class);
             forecastWeatherData = gson.fromJson(String.valueOf(weatherManager.getForecastDataRight()), ForecastWeatherData.class);
         }
+
         currentWeatherData.convertMainToObject();
-
-        //converting forecast weather json to object
-
         forecastWeatherData.convertListToArrayOfObjects();
         forecastWeatherData.convertCityToObject();
         forecastWeatherData.cityObject.convertCoordinatesToObject();
-//left side
-        forecastLabel.setVisible(true);
-        coordinates.setText("Szerokość: " + forecastWeatherData.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherData.cityObject.coordinates.getLon());
-        coordinates.setVisible(true);
-        currentLocation.setText(currentWeatherData.getName() + ", " + forecastWeatherData.getCityObject().getCountry());
-        actualTemp.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
-        tempFeel.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
-        pressure.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");
-        actualWeathCond.setText(currentWeatherData.mainWeatherData.getDescription());
+    }
 
-
-        int i = 0;
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-
-// first day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        firstDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-// second day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        secondDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-
-// third day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        thirdDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-// fourth day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        fourthDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-// fifth day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        fifthDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
+    private Date getAndShowActualDate() {
+        Date date = new Date();
+        SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        actualizationInfo.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
+        return date;
     }
 
     public void setActualizationInfo(String info) {

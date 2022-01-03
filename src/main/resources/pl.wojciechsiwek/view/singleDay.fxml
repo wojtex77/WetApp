@@ -8,30 +8,28 @@
             fx:controller="pl.wojciechsiwek.view.SingleDayController">
     <children>
         <Label fx:id="temp" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" prefHeight="17.0"
-               prefWidth="117.0" text="1" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-               AnchorPane.topAnchor="27.0">
+               prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
             <font>
                 <Font name="System Bold" size="14.0"/>
             </font>
         </Label>
         <Label fx:id="tempNight" alignment="CENTER" contentDisplay="CENTER" layoutY="52.0" prefHeight="17.0"
-               prefWidth="117.0" text="2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-               AnchorPane.topAnchor="52.0"/>
+               prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0"/>
         <Label fx:id="pressure" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0"
-               prefHeight="17.0" prefWidth="117.0" text="3" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                AnchorPane.topAnchor="80.0"/>
         <Label fx:id="hummidity" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="79.0"
-               prefHeight="17.0" prefWidth="117.0" text="4" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                AnchorPane.topAnchor="100.0"/>
         <Label fx:id="description" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0"
-               prefHeight="17.0" prefWidth="117.0" text="5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               prefHeight="17.0" prefWidth="117.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                AnchorPane.topAnchor="130.0">
             <font>
                 <Font name="System Bold" size="13.0"/>
             </font>
         </Label>
         <Label fx:id="date" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="62.0" prefHeight="17.0"
-               prefWidth="117.0" text="6" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               prefWidth="117.0" textFill="#1a3391" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                AnchorPane.topAnchor="5.0"/>
     </children>
     <padding>

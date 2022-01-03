@@ -74,7 +74,7 @@ public class MainWindowController extends BaseController {
     void aboutAuthorAction() throws URISyntaxException, IOException {
         System.out.println("About author action called");
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            Desktop.getDesktop().browse(new URI("http://www.wojciechsiwek.pl"));
+            Desktop.getDesktop().browse(new URI("https://www.wojciechsiwek.pl"));
         }
     }
 
@@ -96,10 +96,16 @@ public class MainWindowController extends BaseController {
     }
 
     private boolean checkInputFilling(String whichInput) {
-        if (whichInput.equals("left"))
-            return !localizationInputLeft.getText().equals("");
-        else if (whichInput.equals("right"))
-            return !localizationInputRight.getText().equals("");
-        else return false;
+
+        switch (whichInput) {
+            case "left": {
+                return !localizationInputLeft.getText().equals("");
+            }
+            case "right": {
+                return !localizationInputRight.getText().equals("");
+            }
+            default:
+                return false;
+        }
     }
 }
