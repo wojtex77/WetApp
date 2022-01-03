@@ -10,9 +10,6 @@ import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ViewFactory {
@@ -61,19 +58,18 @@ public class ViewFactory {
         stage.setTitle(windowTitle);
 
         //setting logo
-        String logoURL =  getClass().getResource("/pl.wojciechsiwek/img/weather.png").toString();
+        String logoURL = getClass().getResource("/pl.wojciechsiwek/img/weather.png").toString();
         Image image = new Image(logoURL);
 
         stage.getIcons().add(image);
 
 
         stage.setResizable(true);
-        if (modal){
+        if (modal) {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-        }
-        else stage.show();
+        } else stage.show();
 
     }
 

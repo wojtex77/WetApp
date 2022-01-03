@@ -27,7 +27,7 @@ public class SingleDayController {
     @FXML
     private Label date;
 
-    public void updateData(Date day, ForecastWeatherData forecastWeatherData, int whichDay){
+    public void updateData(Date day, ForecastWeatherData forecastWeatherData, int whichDay) {
         SimpleDateFormat formatershort = new SimpleDateFormat("dd.MM.yy");
 
         date.setText(formatershort.format(day));

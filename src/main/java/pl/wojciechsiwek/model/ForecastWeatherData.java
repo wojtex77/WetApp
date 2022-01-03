@@ -7,12 +7,11 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 public class ForecastWeatherData {
+    private final ArrayList<ForecastWeatherValues> forecast = new ArrayList<ForecastWeatherValues>();
     public City cityObject;
     private JsonObject city;
     private JsonArray list; //contains list of weather forecast for next days
     private int cnt;
-
-    private final ArrayList<ForecastWeatherValues> forecast = new ArrayList<ForecastWeatherValues>();
 
     public int getCnt() {
         return cnt;

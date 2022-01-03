@@ -47,7 +47,14 @@ public class SingleLocationController {
     @FXML
     private SingleDayController firstDayController, secondDayController, thirdDayController, fourthDayController, fifthDayController;
 
+    private String whichPane;
+
+    private CurrentWeatherData currentWeatherData;
+    private ForecastWeatherData forecastWeatherData;
+
+
     public void updateWeather(WeatherManager weatherManager, String location, String whichPane) {
+        this.whichPane = whichPane;
         GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager, location, whichPane);
         getDataService.start();
         actualizationInfo.setText("Aktualizuję dane...");
@@ -96,11 +103,16 @@ public class SingleLocationController {
 
         //converting current weather json to object
         Gson gson = new Gson();
-        CurrentWeatherData currentWeatherData = gson.fromJson(String.valueOf(weatherManager.getCurrentDataRight()), CurrentWeatherData.class);
+        if (whichPane.equals("left")) {
+            currentWeatherData = gson.fromJson(String.valueOf(weatherManager.getCurrentDataLeft()), CurrentWeatherData.class);
+            forecastWeatherData = gson.fromJson(String.valueOf(weatherManager.getForecastDataLeft()), ForecastWeatherData.class);
+        } else {
+            currentWeatherData = gson.fromJson(String.valueOf(weatherManager.getCurrentDataRight()), CurrentWeatherData.class);
+            forecastWeatherData = gson.fromJson(String.valueOf(weatherManager.getForecastDataRight()), ForecastWeatherData.class);
+        }
         currentWeatherData.convertMainToObject();
 
         //converting forecast weather json to object
-        ForecastWeatherData forecastWeatherData = gson.fromJson(String.valueOf(weatherManager.getForecastDataRight()), ForecastWeatherData.class);
 
         forecastWeatherData.convertListToArrayOfObjects();
         forecastWeatherData.convertCityToObject();
@@ -116,44 +128,44 @@ public class SingleLocationController {
         actualWeathCond.setText(currentWeatherData.mainWeatherData.getDescription());
 
 
-        int i =0;
+        int i = 0;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
 // first day data
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-        firstDayController.updateData(date, forecastWeatherData,i);
+        firstDayController.updateData(date, forecastWeatherData, i);
         i++;
 
 // second day data
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-        secondDayController.updateData(date, forecastWeatherData,i);
+        secondDayController.updateData(date, forecastWeatherData, i);
         i++;
 
 
 // third day data
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-        thirdDayController.updateData(date, forecastWeatherData,i);
+        thirdDayController.updateData(date, forecastWeatherData, i);
         i++;
 
 // fourth day data
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-        fourthDayController.updateData(date, forecastWeatherData,i);
+        fourthDayController.updateData(date, forecastWeatherData, i);
         i++;
 
 // fifth day data
         calendar.add(Calendar.DATE, 1);
         date = calendar.getTime();
-        fifthDayController.updateData(date, forecastWeatherData,i);
+        fifthDayController.updateData(date, forecastWeatherData, i);
         i++;
 
     }
 
-    public void setActualizationInfo(String info){
+    public void setActualizationInfo(String info) {
         actualizationInfo.setText(info);
         actualizationInfo.setVisible(true);
     }

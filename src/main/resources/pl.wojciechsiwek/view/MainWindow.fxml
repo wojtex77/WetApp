@@ -1,92 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1508.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <MenuBar fx:id="menuBar" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Program">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="1508.0" xmlns="http://javafx.com/javafx/16">
+    <children>
+        <MenuBar fx:id="menuBar" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Program">
+                    <items>
+                        <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitProgramAction"
+                                  text="Wyjście"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Informacje">
+                    <items>
+                        <MenuItem fx:id="aboutAuthorButton" mnemonicParsing="false" onAction="#aboutAuthorAction"
+                                  text="O autorze"/>
+                        <MenuItem mnemonicParsing="false" onAction="#aboutProgramAction" text="O programie"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Button fx:id="refreshButton" layoutX="550.0" layoutY="30.0" mnemonicParsing="false"
+                onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683"
+                AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <SplitPane fx:id="splitPane" cacheShape="false" centerShape="false" dividerPositions="0.5"
+                   focusTraversable="false" layoutX="400.0" layoutY="220.0" pickOnBounds="false" prefHeight="160.0"
+                   prefWidth="200.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
             <items>
-                  <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitProgramAction" text="Wyjście" />
+                <fx:include fx:id="leftLocation" source="SingleLocation.fxml"/>
+                <fx:include fx:id="rightLocation" source="SingleLocation.fxml"/>
             </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Informacje">
-            <items>
-                  <MenuItem fx:id="aboutAuthorButton" mnemonicParsing="false" onAction="#aboutAuthorAction" text="O autorze" />
-              <MenuItem mnemonicParsing="false" onAction="#aboutProgramAction" text="O programie" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Button fx:id="refreshButton" layoutX="550.0" layoutY="30.0" mnemonicParsing="false" onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="30.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font></Button>
-      <SplitPane fx:id="splitPane" cacheShape="false" centerShape="false" dividerPositions="0.5" focusTraversable="false" layoutX="400.0" layoutY="220.0" pickOnBounds="false" prefHeight="160.0" prefWidth="200.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <Label fx:id="forecastLabelLeft" alignment="CENTER" layoutX="3.0" layoutY="295.0" text="Prognoza" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="295.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="currentLocalization" alignment="CENTER" contentDisplay="CENTER" layoutY="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
-                     <font>
-                        <Font name="System Bold" size="29.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="actualTempLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="116.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
-                     <font>
-                        <Font name="System Bold" size="29.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="coordinatesLeft" alignment="CENTER" layoutY="75.0" prefHeight="17.0" prefWidth="750.0" text="długość: 0 szerokość: 0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0" />
-                  <Label fx:id="tempFeelLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="171.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="165.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="actualWeathCondLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="227.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="227.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="pressureLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="189.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="actualizationInfoLeft" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="530.0" text="Aktualizuję dane..." visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
-                     <padding>
-                        <Insets left="8.0" right="8.0" />
-                     </padding>
-                  </Label>
-                  <fx:include fx:id="firstLeft" layoutY="379.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="350.0" />
-                  <fx:include fx:id="secondLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="350.0" />
-                  <fx:include fx:id="thirdLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="350.0" />
-                  <fx:include fx:id="fourthLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="350.0" />
-                  <fx:include fx:id="fifthLeft" source="singleDay.fxml" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="350.0" />
-               </children></AnchorPane>
-            <fx:include fx:id="rightLocation" source="SingleLocation.fxml" />
-        </items>
-      </SplitPane>
-      <Label layoutX="14.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="39.0" />
-      <TextField fx:id="localizationInputLeft" layoutX="88.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" promptText="np. Warszawa" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="35.0" />
-      <Label layoutX="985.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:" AnchorPane.rightAnchor="434.0" AnchorPane.topAnchor="39.0" />
-      <TextField fx:id="localizationInputRight" layoutX="1059.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0" promptText="np. Tokio" AnchorPane.rightAnchor="249.0" AnchorPane.topAnchor="35.0" />
-   </children>
+        </SplitPane>
+        <Label layoutX="14.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:"
+               AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="39.0"/>
+        <TextField fx:id="localizationInputLeft" layoutX="88.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="np. Warszawa" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="35.0"/>
+        <Label layoutX="985.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:"
+               AnchorPane.rightAnchor="434.0" AnchorPane.topAnchor="39.0"/>
+        <TextField fx:id="localizationInputRight" layoutX="1059.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="np. Tokio" AnchorPane.rightAnchor="249.0" AnchorPane.topAnchor="35.0"/>
+    </children>
 </AnchorPane>

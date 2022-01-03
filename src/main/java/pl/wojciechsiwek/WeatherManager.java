@@ -13,28 +13,28 @@ public class WeatherManager {
         return currentDataLeft;
     }
 
-    public JsonNode getForecastDataLeft() {
-        return forecastDataLeft;
-    }
-
-    public JsonNode getCurrentDataRight() {
-        return currentDataRight;
-    }
-
-    public JsonNode getForecastDataRight() {
-        return forecastDataRight;
-    }
-
     public void setCurrentDataLeft(JsonNode currentDataLeft) {
         this.currentDataLeft = currentDataLeft;
+    }
+
+    public JsonNode getForecastDataLeft() {
+        return forecastDataLeft;
     }
 
     public void setForecastDataLeft(JsonNode forecastDataLeft) {
         this.forecastDataLeft = forecastDataLeft;
     }
 
+    public JsonNode getCurrentDataRight() {
+        return currentDataRight;
+    }
+
     public void setCurrentDataRight(JsonNode currentDataRight) {
         this.currentDataRight = currentDataRight;
+    }
+
+    public JsonNode getForecastDataRight() {
+        return forecastDataRight;
     }
 
     public void setForecastDataRight(JsonNode forecastDataRight) {
