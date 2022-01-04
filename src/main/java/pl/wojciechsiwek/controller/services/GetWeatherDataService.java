@@ -14,9 +14,8 @@ import java.util.Locale;
 public class GetWeatherDataService extends Service {
 
     private final WeatherManager weatherManager;
-    private final String location;
+    private String location;
     private final String whichPane;
-
     private Integer currentStatus, forecastStatus;
 
     public GetWeatherDataService(WeatherManager weatherManager, String location, String whichPane) {
@@ -31,11 +30,38 @@ public class GetWeatherDataService extends Service {
         return new Task<WeatherDataResult>() {
             @Override
             protected WeatherDataResult call() throws Exception {
-                return getWeatherData(location, whichPane);
+                return getData(location, whichPane);
             }
         };
     }
 
+    private WeatherDataResult getData(String location, String whichPane) {
+        location = location.toLowerCase(Locale.ROOT).replace(",", "%2C").replace(" ", "%20");
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + Configuration.getAPIKey() + "&units=metric&lang=pl";
+        try {
+            HttpResponse<JsonNode> currentWeatherResponse = Unirest.get(url)
+                    .asJson();
+
+            this.currentStatus = currentWeatherResponse.getStatus();
+
+            System.out.println("Current " + this.whichPane + " weather data response status: " + currentWeatherResponse.getStatus());
+            if ((currentWeatherResponse.getStatus() == 200)) {
+                if (whichPane == "left") {
+                    weatherManager.setCurrentDataLeft(currentWeatherResponse.getBody());
+                    weatherManager.convertCurrentToObject(whichPane);
+
+                } else {
+                    weatherManager.setCurrentDataRight(currentWeatherResponse.getBody());
+                }
+                return WeatherDataResult.SUCCESS;
+            }
+            return WeatherDataResult.FAILED;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return WeatherDataResult.FAILED;
+        }
+    }
 
     private WeatherDataResult getWeatherData(String location, String whichPane) {
 

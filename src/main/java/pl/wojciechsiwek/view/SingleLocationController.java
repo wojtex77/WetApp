@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 import pl.wojciechsiwek.controller.services.GetWeatherDataService;
+import pl.wojciechsiwek.model.CurrentData;
 import pl.wojciechsiwek.model.CurrentWeatherData;
 import pl.wojciechsiwek.model.ForecastWeatherData;
 
@@ -95,8 +96,7 @@ public class SingleLocationController {
 
     private void updateData(WeatherManager weatherManager) {
         Date date = getAndShowActualDate();
-        convertJsonToObjects(weatherManager);
-        setActualConditions();
+        setActualConditions(weatherManager.getCurrentDataObjectLeft());
         setForecastConditions(date);
     }
 
@@ -137,32 +137,17 @@ public class SingleLocationController {
         i++;
     }
 
-    private void setActualConditions() {
+    private void setActualConditions(CurrentData data) {
         forecastLabel.setVisible(true);
-        coordinates.setText("Szerokość: " + forecastWeatherData.cityObject.coordinates.getLat() + "; Długość: " + forecastWeatherData.cityObject.coordinates.getLon());
+        coordinates.setText("Szerokość: " + data.getLatitude() + "; Długość: " + data.getLongtitude());
         coordinates.setVisible(true);
-        currentLocation.setText(currentWeatherData.getName() + ", " + forecastWeatherData.getCityObject().getCountry());
-        actualTemp.setText(currentWeatherData.mainWeatherData.getTemp() + " " + (char) 176 + "C");
-        tempFeel.setText("Odczuwalna: " + currentWeatherData.mainWeatherData.getFeels_like() + " " + (char) 176 + "C");
-        pressure.setText("Ciśnienie: " + currentWeatherData.mainWeatherData.getPressure() + " hPa");
-        actualWeathCond.setText(currentWeatherData.mainWeatherData.getDescription());
+        currentLocation.setText(data.getCity() + ", " + data.getCountry());
+        actualTemp.setText(data.getTemperature() + " " + (char) 176 + "C");
+        tempFeel.setText("Odczuwalna: " + data.getFeelsLike() + " " + (char) 176 + "C");
+        pressure.setText("Ciśnienie: " + data.getPressure() + " hPa");
+        actualWeathCond.setText(data.getDescription());
     }
 
-    private void convertJsonToObjects(WeatherManager weatherManager) {
-        //converting current weather json to object
-        if (whichPane.equals("left")) {
-            currentWeatherData = gson.fromJson(String.valueOf(weatherManager.getCurrentDataLeft()), CurrentWeatherData.class);
-            forecastWeatherData = gson.fromJson(String.valueOf(weatherManager.getForecastDataLeft()), ForecastWeatherData.class);
-        } else {
-            currentWeatherData = gson.fromJson(String.valueOf(weatherManager.getCurrentDataRight()), CurrentWeatherData.class);
-            forecastWeatherData = gson.fromJson(String.valueOf(weatherManager.getForecastDataRight()), ForecastWeatherData.class);
-        }
-
-        currentWeatherData.convertMainToObject();
-        forecastWeatherData.convertListToArrayOfObjects();
-        forecastWeatherData.convertCityToObject();
-        forecastWeatherData.cityObject.convertCoordinatesToObject();
-    }
 
     private Date getAndShowActualDate() {
         Date date = new Date();

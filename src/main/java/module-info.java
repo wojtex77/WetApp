@@ -6,9 +6,14 @@ module WetApp {
     requires unirest.java;
     requires com.google.gson;
     requires java.desktop;
+    requires jackson.annotations;
+    requires jackson.core;
+    requires jackson.databind;
+    requires json;
 
     opens pl.wojciechsiwek;
     opens pl.wojciechsiwek.view;
     opens pl.wojciechsiwek.controller;
+    opens pl.wojciechsiwek.model;
 
 }
