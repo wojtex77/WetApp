@@ -50,6 +50,7 @@ public class SingleLocationController {
     private String whichPane;
     private CurrentWeatherData currentWeatherData;
     private ForecastWeatherData forecastWeatherData;
+    private static final Gson gson = new Gson();
 
 
     public void updateWeather(WeatherManager weatherManager, String location, String whichPane) {
@@ -149,7 +150,6 @@ public class SingleLocationController {
 
     private void convertJsonToObjects(WeatherManager weatherManager) {
         //converting current weather json to object
-        Gson gson = new Gson();
         if (whichPane.equals("left")) {
             currentWeatherData = gson.fromJson(String.valueOf(weatherManager.getCurrentDataLeft()), CurrentWeatherData.class);
             forecastWeatherData = gson.fromJson(String.valueOf(weatherManager.getForecastDataLeft()), ForecastWeatherData.class);

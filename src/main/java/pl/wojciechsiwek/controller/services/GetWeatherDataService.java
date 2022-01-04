@@ -6,18 +6,18 @@ import com.mashape.unirest.http.Unirest;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import pl.wojciechsiwek.WeatherManager;
+import pl.wojciechsiwek.config.Configuration;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 
 import java.util.Locale;
 
 public class GetWeatherDataService extends Service {
 
-    WeatherManager weatherManager;
-    String location;
+    private final WeatherManager weatherManager;
+    private final String location;
+    private final String whichPane;
 
-    String whichPane;
-
-    Integer currentStatus, forecastStatus;
+    private Integer currentStatus, forecastStatus;
 
     public GetWeatherDataService(WeatherManager weatherManager, String location, String whichPane) {
         this.weatherManager = weatherManager;
@@ -43,12 +43,12 @@ public class GetWeatherDataService extends Service {
         try {
             HttpResponse<JsonNode> currentWeatherResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/weather?q=" + location + "&id=2172797&lang=pl&units=metric&mode=json")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
-                    .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
+                    .header("x-rapidapi-key", Configuration.getAPIKey())
                     .asJson();
 
             HttpResponse<JsonNode> forecastResponse = Unirest.get("https://community-open-weather-map.p.rapidapi.com/forecast/daily?q=" + location + "&cnt=5&units=metric&mode=json&lang=pl")
                     .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
-                    .header("x-rapidapi-key", "13aed539c7msh2c42616037c9a87p1393eajsn2c644a8d22df")
+                    .header("x-rapidapi-key", Configuration.getAPIKey())
                     .asJson();
 
 
