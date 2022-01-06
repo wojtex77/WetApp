@@ -1,18 +1,16 @@
 package pl.wojciechsiwek.view;
 
-import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.WeatherDataResult;
-import pl.wojciechsiwek.controller.services.GetWeatherDataService;
+import pl.wojciechsiwek.controller.services.WeatherDataService;
 import pl.wojciechsiwek.model.CurrentData;
-import pl.wojciechsiwek.model.CurrentWeatherData;
-import pl.wojciechsiwek.model.ForecastWeatherData;
+import pl.wojciechsiwek.model.ForecastData;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SingleLocationController {
@@ -49,24 +47,22 @@ public class SingleLocationController {
     private SingleDayController firstDayController, secondDayController, thirdDayController, fourthDayController, fifthDayController;
 
     private String whichPane;
-    private CurrentWeatherData currentWeatherData;
-    private ForecastWeatherData forecastWeatherData;
-    private static final Gson gson = new Gson();
 
 
     public void updateWeather(WeatherManager weatherManager, String location, String whichPane) {
         this.whichPane = whichPane;
-        GetWeatherDataService getDataService = new GetWeatherDataService(weatherManager, location, whichPane);
-        getDataService.start();
+        WeatherDataService currentWeatherDataService = new WeatherDataService(weatherManager, location, whichPane);
+        currentWeatherDataService.start();
         setActualizationInfo("Aktualizuję dane...");
 
-        getDataService.setOnSucceeded(event -> {
-            WeatherDataResult weatherDataResult = (WeatherDataResult) getDataService.getValue();
+        currentWeatherDataService.setOnSucceeded(event -> {
+            WeatherDataResult weatherDataResult = (WeatherDataResult) currentWeatherDataService.getValue();
 
             switch (weatherDataResult) {
                 case SUCCESS: {
                     System.out.println("Data refreshing done");
-                    updateData(weatherManager);
+                    setActualConditions(weatherManager.getCurrentDataObjectLeft());
+                    setForecastConditions(weatherManager.getForecastDataArrayLeft());
                     break;
 
                 }
@@ -94,47 +90,12 @@ public class SingleLocationController {
         });
     }
 
-    private void updateData(WeatherManager weatherManager) {
-        Date date = getAndShowActualDate();
-        setActualConditions(weatherManager.getCurrentDataObjectLeft());
-        setForecastConditions(date);
-    }
-
-    private void setForecastConditions(Date date) {
-        int i = 0;
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-
-        // first day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        firstDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-        // second day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        secondDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-
-        // third day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        thirdDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-        // fourth day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        fourthDayController.updateData(date, forecastWeatherData, i);
-        i++;
-
-        // fifth day data
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        fifthDayController.updateData(date, forecastWeatherData, i);
-        i++;
+    private void setForecastConditions(ArrayList<ForecastData> data) {
+        firstDayController.updateData(data.get(0));
+        secondDayController.updateData(data.get(1));
+        thirdDayController.updateData(data.get(2));
+        fourthDayController.updateData(data.get(3));
+        fifthDayController.updateData(data.get(4));
     }
 
     private void setActualConditions(CurrentData data) {
@@ -146,14 +107,15 @@ public class SingleLocationController {
         tempFeel.setText("Odczuwalna: " + data.getFeelsLike() + " " + (char) 176 + "C");
         pressure.setText("Ciśnienie: " + data.getPressure() + " hPa");
         actualWeathCond.setText(data.getDescription());
+        setActualizationInfo("Ostatnio zaktualizowano " + getDate());
     }
 
 
-    private Date getAndShowActualDate() {
+    private String getDate() {
         Date date = new Date();
         SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-        actualizationInfo.setText("Ostatnio zaktualizowano " + formatterLong.format(date));
-        return date;
+        String actualDate = formatterLong.format(date);
+        return actualDate;
     }
 
     public void setActualizationInfo(String info) {
