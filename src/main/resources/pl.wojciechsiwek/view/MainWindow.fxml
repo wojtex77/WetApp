@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="1508.0" xmlns="http://javafx.com/javafx/16">
+    <children>
+        <MenuBar fx:id="menuBar" layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Program">
+                    <items>
+                        <MenuItem fx:id="exitButton" mnemonicParsing="false" onAction="#exitProgramAction"
+                                  text="Wyjście"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Informacje">
+                    <items>
+                        <MenuItem fx:id="aboutAuthorButton" mnemonicParsing="false" onAction="#aboutAuthorAction"
+                                  text="O autorze"/>
+                        <MenuItem mnemonicParsing="false" onAction="#aboutProgramAction" text="O programie"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Button fx:id="refreshButton" layoutX="550.0" layoutY="30.0" mnemonicParsing="false"
+                onAction="#refreshDataAction" prefHeight="35.0" prefWidth="200.0" text="Zaktualizuj" textFill="#137683"
+                AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <SplitPane fx:id="splitPane" cacheShape="false" centerShape="false" dividerPositions="0.5"
+                   focusTraversable="false" layoutX="400.0" layoutY="220.0" pickOnBounds="false" prefHeight="160.0"
+                   prefWidth="200.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+            <items>
+                <fx:include fx:id="leftLocation" source="SingleLocation.fxml"/>
+                <fx:include fx:id="rightLocation" source="SingleLocation.fxml"/>
+            </items>
+        </SplitPane>
+        <Label layoutX="14.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:"
+               AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="39.0"/>
+        <TextField fx:id="localizationInputLeft" layoutX="88.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="np. Warszawa" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="35.0"/>
+        <Label layoutX="985.0" layoutY="39.0" prefHeight="17.0" prefWidth="89.0" text="Lokalizacja:"
+               AnchorPane.rightAnchor="434.0" AnchorPane.topAnchor="39.0"/>
+        <TextField fx:id="localizationInputRight" layoutX="1059.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="np. Tokio" AnchorPane.rightAnchor="249.0" AnchorPane.topAnchor="35.0"/>
+    </children>
+</AnchorPane>

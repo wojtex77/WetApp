@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.wojciechsiwek.view.SingleLocationController">
+    <children>
+        <Label fx:id="forecastLabel" alignment="CENTER" layoutX="13.0" layoutY="305.0" text="Prognoza" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="300.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <padding>
+                <Insets left="8.0" right="8.0" />
+            </padding>
+        </Label>
+        <Label fx:id="currentLocation" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="42.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+            <font>
+                <Font name="System Bold" size="29.0" />
+            </font>
+        </Label>
+        <Label fx:id="actualTemp" alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="126.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="130.0">
+            <font>
+                <Font name="System Bold" size="29.0" />
+            </font>
+        </Label>
+        <Label fx:id="coordinates" alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="17.0" prefWidth="750.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="85.0" />
+        <Label fx:id="tempFeel" alignment="CENTER" contentDisplay="CENTER" layoutX="239.0" layoutY="181.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="170.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="actualWeathCond" alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="237.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="220.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="pressure" alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="199.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="195.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="actualizationInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="530.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <padding>
+                <Insets left="8.0" right="8.0" />
+            </padding>
+        </Label>
+        <fx:include fx:id="firstDay" source="singleDay.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="350.0" />
+        <fx:include fx:id="secondDay" source="singleDay.fxml" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="350.0" />
+        <fx:include fx:id="thirdDay" source="singleDay.fxml" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="350.0" />
+        <fx:include fx:id="fourthDay" source="singleDay.fxml" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="350.0" />
+        <fx:include fx:id="fifthDay" source="singleDay.fxml" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="350.0" />
+    </children>
+</AnchorPane>

@@ -10,8 +10,6 @@ import pl.wojciechsiwek.WeatherManager;
 import pl.wojciechsiwek.controller.BaseController;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ViewFactory {
@@ -24,25 +22,18 @@ public class ViewFactory {
 
     public void showMainWindow() {
         System.out.println("Main window method called");
-
-        BaseController mainWindowController = new MainWindowController(weatherManager, this, "/view/MainWindow.fxml");
+        BaseController mainWindowController = new MainWindowController(weatherManager, this, "/pl.wojciechsiwek/view/MainWindow.fxml");
         initializeStage(mainWindowController, "WetApp - aplikacja pogodowa", false);
-
-
     }
 
     public void showAboutProgramWindow() {
         System.out.println("About program method called");
-
-        BaseController controller = new AboutController(weatherManager, this, "/view/About.fxml");
+        BaseController controller = new AboutController(weatherManager, this, "/pl.wojciechsiwek/view/About.fxml");
         initializeStage(controller, "WetApp - O programie", true);
-
-
     }
 
 
     private void initializeStage(BaseController controller, String windowTitle, Boolean modal) {
-
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(controller.getFxmlName())));
         fxmlLoader.setController(controller);
         Parent parent;
@@ -52,28 +43,20 @@ public class ViewFactory {
             e.printStackTrace();
             return;
         }
-
         Scene scene = new Scene(parent);
-
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle(windowTitle);
-
         //setting logo
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        String pathToImg = s + "/src/main/resources/img/weather.png";
-        stage.getIcons().add(new Image("file:///" + pathToImg));
-
-
+        String logoURL = Objects.requireNonNull(getClass().getResource("/pl.wojciechsiwek/img/weather.png")).toString();
+        Image image = new Image(logoURL);
+        stage.getIcons().add(image);
         stage.setResizable(true);
-        if (modal){
+        if (modal) {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-        }
-        else stage.show();
-
+        } else stage.show();
     }
 
     public void closeStage(Stage stageToClose) {

@@ -5,9 +5,9 @@ import pl.wojciechsiwek.view.ViewFactory;
 
 public class BaseController {
 
-    public WeatherManager weatherManager;
-    public ViewFactory viewFactory;
-    public String fxmlName;
+    public final WeatherManager weatherManager;
+    public final ViewFactory viewFactory;
+    public final String fxmlName;
 
     public BaseController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         this.weatherManager = weatherManager;
