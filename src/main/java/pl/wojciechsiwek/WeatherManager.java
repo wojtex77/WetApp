@@ -1,6 +1,5 @@
 package pl.wojciechsiwek;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mashape.unirest.http.JsonNode;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -83,7 +82,7 @@ public class WeatherManager {
         JSONObject coord = data.getObject().getJSONObject("coord");
         JSONArray weather = data.getObject().getJSONArray("weather");
         ArrayList <Object> myArrayList = (ArrayList) weather.toList();
-        HashMap<String, Integer> desc = (HashMap) myArrayList.get(0);
+        HashMap<String, Integer> desc = (HashMap <String, Integer>) myArrayList.get(0);
 
         currentData.setTemperature(main.getDouble("temp"));
         currentData.setFeelsLike(main.getDouble("feels_like"));
@@ -114,9 +113,9 @@ public class WeatherManager {
             daily = forecastDataRight.getObject().getJSONArray("daily");
         }
         ArrayList <Object> myArrayList = (ArrayList) daily.toList();
-        HashMap<String, HashMap> dailyMapHashes;
+        HashMap<String, HashMap<String, Double>> dailyMapHashes;
         HashMap<String, Integer> dailyMapIntegers;
-        HashMap<String, Double> temperatures;
+        HashMap temperatures;
         HashMap<String, Integer> desc;
 
         final String regex = "description=\\s*([^,\\r]*)";
@@ -125,8 +124,8 @@ public class WeatherManager {
         String description;
 
         for (int i = 0; i < 5; i++) {
-            dailyMapHashes = (HashMap) myArrayList.get(i);
-            dailyMapIntegers = (HashMap) myArrayList.get(i);
+            dailyMapHashes = (HashMap<String, HashMap<String, Double>>) myArrayList.get(i);
+            dailyMapIntegers = (HashMap <String, Integer>) myArrayList.get(i);
             temperatures = dailyMapHashes.get("temp");
 
             desc = (HashMap) myArrayList.get(i);
@@ -137,8 +136,10 @@ public class WeatherManager {
 
             ForecastData singleDayForecastData = new ForecastData();
 
-            singleDayForecastData.setTempDay(temperatures.get("day"));
-            singleDayForecastData.setTempNight(temperatures.get("night"));
+            String dayTempByString = temperatures.get("day").toString();
+            String nightTempByString = temperatures.get("night").toString();
+            singleDayForecastData.setTempDay(Double.parseDouble(dayTempByString));
+            singleDayForecastData.setTempNight(Double.parseDouble(nightTempByString));
             singleDayForecastData.setPressure(dailyMapIntegers.get("pressure"));
             singleDayForecastData.setHummidity(dailyMapIntegers.get("humidity"));
             if (matcher.find()) {
