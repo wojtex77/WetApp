@@ -53,14 +53,13 @@ public class WeatherDataService extends Service {
                 if (whichPane.equals("left")) {
                     weatherManager.setCurrentDataLeft(currentWeatherResponse.getBody());
                     weatherManager.convertCurrentToObject(whichPane);
-                    getForecast(weatherManager.getCurrentDataObjectLeft());
+                    return getForecast(weatherManager.getCurrentDataObjectLeft());
 
                 } else {
                     weatherManager.setCurrentDataRight(currentWeatherResponse.getBody());
                     weatherManager.convertCurrentToObject("right");
-                    getForecast(weatherManager.getCurrentDataObjectRight());
+                    return getForecast(weatherManager.getCurrentDataObjectRight());
                 }
-                return WeatherDataResult.SUCCESS;
             } else if (currentWeatherResponse.getStatus() == 404) {
                 return WeatherDataResult.FAILED_NO_LOCATION_FOUND;
             } else if (currentWeatherResponse.getStatus() == 401) {

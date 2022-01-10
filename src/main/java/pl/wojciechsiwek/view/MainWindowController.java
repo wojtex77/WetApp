@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pl.wojciechsiwek.WeatherManager;
+import pl.wojciechsiwek.config.Messages;
 import pl.wojciechsiwek.controller.BaseController;
 
 import java.awt.*;
@@ -50,6 +51,8 @@ public class MainWindowController extends BaseController {
     @FXML
     private SingleLocationController rightLocationController, leftLocationController;
 
+    private Messages messages= new Messages();
+
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         super(weatherManager, viewFactory, fxmlName);
@@ -84,13 +87,13 @@ public class MainWindowController extends BaseController {
         if (checkInputFilling("left")) {
             leftLocationController.updateWeather(weatherManager, localizationInputLeft.getText(), "left");
         } else {
-            leftLocationController.setActualizationInfo("Pole miejscowości nie może być puste");
+            leftLocationController.setActualizationInfo(messages.getNoLocationInputMessage());
         }
 
         if (checkInputFilling("right")) {
             rightLocationController.updateWeather(weatherManager, localizationInputRight.getText(), "right");
         } else {
-            rightLocationController.setActualizationInfo("Pole miejscowości nie może być puste");
+            rightLocationController.setActualizationInfo(messages.getNoLocationInputMessage());
         }
 
     }

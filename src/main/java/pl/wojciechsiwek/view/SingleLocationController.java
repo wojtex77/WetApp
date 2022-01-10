@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import pl.wojciechsiwek.WeatherManager;
+import pl.wojciechsiwek.config.Messages;
 import pl.wojciechsiwek.controller.WeatherDataResult;
 import pl.wojciechsiwek.controller.services.WeatherDataService;
 import pl.wojciechsiwek.model.CurrentData;
@@ -48,6 +49,8 @@ public class SingleLocationController {
 
     private String whichPane;
 
+    private Messages messages = new Messages();
+
 
     public void updateWeather(WeatherManager weatherManager, String location, String whichPane) {
         this.whichPane = whichPane;
@@ -75,22 +78,22 @@ public class SingleLocationController {
                 }
                 case FAILED: {
                     System.out.println("Data refreshing failed");
-                    actualizationInfo.setText("Aktualizacja danych nie powiodła się");
+                    actualizationInfo.setText(messages.getDataActualizationFailedMessage());
                     break;
                 }
                 case FAILED_NO_LOCATION_FOUND: {
                     System.out.println("No location found");
-                    actualizationInfo.setText("Aktualizacja danych nie powiodła się - lokalizacja niepoprawna");
+                    actualizationInfo.setText(messages.getNoLocationFoundMessage());
                     break;
                 }
                 case FAILED_BY_TOO_MANY_CONNECTIONS: {
                     System.out.println("Too many connections");
-                    actualizationInfo.setText("Aktualizacja danych nie powiodła się - zbyt wiele zapytań, odśwież za minutkę");
+                    actualizationInfo.setText(messages.getTooManyConectionsMessage());
                     break;
                 }
                 case FAILED_WRONG_KEY: {
                     System.out.println("Incorrect API key");
-                    actualizationInfo.setText("Aktualizacja danych nie powiodła się - skontaktuj się z deweloperem");
+                    actualizationInfo.setText(messages.getIncorrectAPIMessage());
                     break;
                 }
             }

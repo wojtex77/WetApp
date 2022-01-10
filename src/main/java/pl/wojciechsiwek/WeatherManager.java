@@ -61,10 +61,9 @@ public class WeatherManager {
     public void convertCurrentToObject(String whichPane) throws JsonProcessingException {
         CurrentData currentData = new CurrentData();
         JsonNode data;
-        if (whichPane.equals("left")){
+        if (whichPane.equals("left")) {
             data = currentDataLeft;
-        }
-        else{
+        } else {
             data = currentDataRight;
         }
 
@@ -84,10 +83,9 @@ public class WeatherManager {
         currentData.setLongtitude(coord.getDouble("lon"));
         currentData.setDescription(String.valueOf(desc.get("description")));
 
-        if (whichPane.equals("left")){
+        if (whichPane.equals("left")) {
             currentDataObjectLeft = currentData;
-        }
-        else {
+        } else {
             currentDataObjectRight = currentData;
         }
     }
@@ -99,10 +97,9 @@ public class WeatherManager {
         calendar.setTime(date);
         ArrayList<ForecastData> forecastData = new ArrayList<>();
         JSONArray daily;
-        if (whichPane.equals("left")){
+        if (whichPane.equals("left")) {
             daily = forecastDataLeft.getObject().getJSONArray("daily");
-        }
-        else {
+        } else {
             daily = forecastDataRight.getObject().getJSONArray("daily");
         }
         ArrayList myArrayList = (ArrayList) daily.toList();
@@ -143,10 +140,9 @@ public class WeatherManager {
             forecastData.add(singleDayForecastData);
         }
 
-        if (whichPane.equals("left")){
+        if (whichPane.equals("left")) {
             forecastDataArrayLeft = forecastData;
-        }
-        else{
+        } else {
             forecastDataArrayRight = forecastData;
         }
 
