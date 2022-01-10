@@ -15,9 +15,8 @@ import java.util.Locale;
 public class WeatherDataService extends Service {
 
     private final WeatherManager weatherManager;
-    private String location;
     private final String whichPane;
-    private Integer currentStatus;
+    private final String location;
 
     public WeatherDataService(WeatherManager weatherManager, String location, String whichPane) {
         this.weatherManager = weatherManager;
@@ -31,7 +30,13 @@ public class WeatherDataService extends Service {
         return new Task<WeatherDataResult>() {
             @Override
             protected WeatherDataResult call() throws Exception {
-                return getData(location, whichPane);
+                try {
+                    return getData(location, whichPane);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return WeatherDataResult.FAILED;
+                }
+
             }
         };
     }
@@ -42,18 +47,26 @@ public class WeatherDataService extends Service {
         try {
             HttpResponse<JsonNode> currentWeatherResponse = Unirest.get(url).asJson();
 
-            this.currentStatus = currentWeatherResponse.getStatus();
 
             System.out.println("Current " + this.whichPane + " weather data response status: " + currentWeatherResponse.getStatus());
             if ((currentWeatherResponse.getStatus() == 200)) {
-                if (whichPane == "left") {
+                if (whichPane.equals("left")) {
                     weatherManager.setCurrentDataLeft(currentWeatherResponse.getBody());
                     weatherManager.convertCurrentToObject(whichPane);
                     getForecast(weatherManager.getCurrentDataObjectLeft());
 
                 } else {
+                    weatherManager.setCurrentDataRight(currentWeatherResponse.getBody());
+                    weatherManager.convertCurrentToObject("right");
+                    getForecast(weatherManager.getCurrentDataObjectRight());
                 }
                 return WeatherDataResult.SUCCESS;
+            } else if (currentWeatherResponse.getStatus() == 404) {
+                return WeatherDataResult.FAILED_NO_LOCATION_FOUND;
+            } else if (currentWeatherResponse.getStatus() == 401) {
+                return WeatherDataResult.FAILED_WRONG_KEY;
+            } else if (currentWeatherResponse.getStatus() == 429) {
+                return WeatherDataResult.FAILED_BY_TOO_MANY_CONNECTIONS;
             }
             return WeatherDataResult.FAILED;
 
@@ -63,22 +76,23 @@ public class WeatherDataService extends Service {
         }
     }
 
-    private WeatherDataResult getForecast(CurrentData currentDataObjectLeft) {
-        double longtitude = currentDataObjectLeft.getLongtitude();
-        double latitude = currentDataObjectLeft.getLatitude();
+    private WeatherDataResult getForecast(CurrentData currentDataObject) {
+        double longtitude = currentDataObject.getLongtitude();
+        double latitude = currentDataObject.getLatitude();
 
         String url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longtitude + "&appid=" + Configuration.getAPIKey() + "&units=metric&lang=pl";
         try {
             HttpResponse<JsonNode> forecastWeatherResponse = Unirest.get(url).asJson();
 
-            this.currentStatus = forecastWeatherResponse.getStatus();
 
             System.out.println("Forecast " + this.whichPane + " weather data response status: " + forecastWeatherResponse.getStatus());
             if ((forecastWeatherResponse.getStatus() == 200)) {
-                if (whichPane == "left") {
+                if (whichPane.equals("left")) {
                     weatherManager.setForecastDataLeft(forecastWeatherResponse.getBody());
                     weatherManager.convertForecastToObject(whichPane);
                 } else {
+                    weatherManager.setForecastDataRight(forecastWeatherResponse.getBody());
+                    weatherManager.convertForecastToObject(whichPane);
                 }
                 return WeatherDataResult.SUCCESS;
             }

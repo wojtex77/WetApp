@@ -61,8 +61,15 @@ public class SingleLocationController {
             switch (weatherDataResult) {
                 case SUCCESS: {
                     System.out.println("Data refreshing done");
-                    setActualConditions(weatherManager.getCurrentDataObjectLeft());
-                    setForecastConditions(weatherManager.getForecastDataArrayLeft());
+
+                    if (whichPane.equals("left")){
+                        setActualConditions(weatherManager.getCurrentDataObjectLeft());
+                        setForecastConditions(weatherManager.getForecastDataArrayLeft());
+                    }
+                    else {
+                        setActualConditions(weatherManager.getCurrentDataObjectRight());
+                        setForecastConditions(weatherManager.getForecastDataArrayRight());
+                    }
                     break;
 
                 }

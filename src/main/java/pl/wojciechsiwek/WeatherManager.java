@@ -22,10 +22,16 @@ public class WeatherManager {
     private JsonNode currentDataRight = null;
     private JsonNode forecastDataRight = null;
     private CurrentData currentDataObjectLeft;
+    private CurrentData currentDataObjectRight;
     private ArrayList<ForecastData> forecastDataArrayLeft;
+    private ArrayList<ForecastData> forecastDataArrayRight;
 
     public ArrayList<ForecastData> getForecastDataArrayLeft() {
         return forecastDataArrayLeft;
+    }
+
+    public ArrayList<ForecastData> getForecastDataArrayRight() {
+        return forecastDataArrayRight;
     }
 
     public CurrentData getCurrentDataObjectLeft() {
@@ -54,24 +60,36 @@ public class WeatherManager {
 
     public void convertCurrentToObject(String whichPane) throws JsonProcessingException {
         CurrentData currentData = new CurrentData();
+        JsonNode data;
+        if (whichPane.equals("left")){
+            data = currentDataLeft;
+        }
+        else{
+            data = currentDataRight;
+        }
 
-        JSONObject main = currentDataLeft.getObject().getJSONObject("main");
-        JSONObject sys = currentDataLeft.getObject().getJSONObject("sys");
-        JSONObject coord = currentDataLeft.getObject().getJSONObject("coord");
-        JSONArray weather = currentDataLeft.getObject().getJSONArray("weather");
+        JSONObject main = data.getObject().getJSONObject("main");
+        JSONObject sys = data.getObject().getJSONObject("sys");
+        JSONObject coord = data.getObject().getJSONObject("coord");
+        JSONArray weather = data.getObject().getJSONArray("weather");
         ArrayList myArrayList = (ArrayList) weather.toList();
         HashMap<String, Integer> desc = (HashMap) myArrayList.get(0);
 
         currentData.setTemperature(main.getDouble("temp"));
         currentData.setFeelsLike(main.getDouble("feels_like"));
         currentData.setPressure(main.getInt("pressure"));
-        currentData.setCity(currentDataLeft.getObject().getString("name"));
+        currentData.setCity(data.getObject().getString("name"));
         currentData.setCountry(sys.getString("country"));
         currentData.setLatitude(coord.getDouble("lat"));
         currentData.setLongtitude(coord.getDouble("lon"));
         currentData.setDescription(String.valueOf(desc.get("description")));
 
-        currentDataObjectLeft = currentData;
+        if (whichPane.equals("left")){
+            currentDataObjectLeft = currentData;
+        }
+        else {
+            currentDataObjectRight = currentData;
+        }
     }
 
     public void convertForecastToObject(String whichPane) throws JsonProcessingException {
@@ -79,9 +97,14 @@ public class WeatherManager {
         SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yy");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-
         ArrayList<ForecastData> forecastData = new ArrayList<>();
-        JSONArray daily = forecastDataLeft.getObject().getJSONArray("daily");
+        JSONArray daily;
+        if (whichPane.equals("left")){
+            daily = forecastDataLeft.getObject().getJSONArray("daily");
+        }
+        else {
+            daily = forecastDataRight.getObject().getJSONArray("daily");
+        }
         ArrayList myArrayList = (ArrayList) daily.toList();
         HashMap<String, HashMap> dailyMapHashes;
         HashMap<String, Integer> dailyMapIntegers;
@@ -120,7 +143,16 @@ public class WeatherManager {
             forecastData.add(singleDayForecastData);
         }
 
-        forecastDataArrayLeft = forecastData;
+        if (whichPane.equals("left")){
+            forecastDataArrayLeft = forecastData;
+        }
+        else{
+            forecastDataArrayRight = forecastData;
+        }
 
+    }
+
+    public CurrentData getCurrentDataObjectRight() {
+        return currentDataObjectRight;
     }
 }
