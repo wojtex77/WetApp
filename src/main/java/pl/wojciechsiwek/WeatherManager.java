@@ -17,14 +17,25 @@ import java.util.regex.Pattern;
 
 public class WeatherManager {
 
-    private JsonNode currentDataLeft = null;
-    private JsonNode forecastDataLeft = null;
-    private JsonNode currentDataRight = null;
-    private JsonNode forecastDataRight = null;
+    private JsonNode currentDataLeft;
+    private JsonNode forecastDataLeft;
+    private JsonNode currentDataRight;
+    private JsonNode forecastDataRight;
     private CurrentData currentDataObjectLeft;
     private CurrentData currentDataObjectRight;
     private ArrayList<ForecastData> forecastDataArrayLeft;
     private ArrayList<ForecastData> forecastDataArrayRight;
+
+    public WeatherManager() {
+        this.currentDataLeft = null;
+        this.forecastDataLeft = null;
+        this.currentDataRight = null;
+        this.forecastDataRight = null;
+        this.currentDataObjectLeft = null;
+        this.currentDataObjectRight = null;
+        this.forecastDataArrayLeft = null;
+        this.forecastDataArrayRight = null;
+    }
 
     public ArrayList<ForecastData> getForecastDataArrayLeft() {
         return forecastDataArrayLeft;
@@ -38,27 +49,27 @@ public class WeatherManager {
         return currentDataObjectLeft;
     }
 
+    public CurrentData getCurrentDataObjectRight() {
+        return currentDataObjectRight;
+    }
 
     public void setCurrentDataLeft(JsonNode currentDataLeft) {
         this.currentDataLeft = currentDataLeft;
     }
 
-
     public void setForecastDataLeft(JsonNode forecastDataLeft) {
         this.forecastDataLeft = forecastDataLeft;
     }
-
 
     public void setCurrentDataRight(JsonNode currentDataRight) {
         this.currentDataRight = currentDataRight;
     }
 
-
     public void setForecastDataRight(JsonNode forecastDataRight) {
         this.forecastDataRight = forecastDataRight;
     }
 
-    public void convertCurrentToObject(String whichPane) throws JsonProcessingException {
+    public void convertCurrentToObject(String whichPane) {
         CurrentData currentData = new CurrentData();
         JsonNode data;
         if (whichPane.equals("left")) {
@@ -71,7 +82,7 @@ public class WeatherManager {
         JSONObject sys = data.getObject().getJSONObject("sys");
         JSONObject coord = data.getObject().getJSONObject("coord");
         JSONArray weather = data.getObject().getJSONArray("weather");
-        ArrayList myArrayList = (ArrayList) weather.toList();
+        ArrayList <Object> myArrayList = (ArrayList) weather.toList();
         HashMap<String, Integer> desc = (HashMap) myArrayList.get(0);
 
         currentData.setTemperature(main.getDouble("temp"));
@@ -90,7 +101,7 @@ public class WeatherManager {
         }
     }
 
-    public void convertForecastToObject(String whichPane) throws JsonProcessingException {
+    public void convertForecastToObject(String whichPane) {
         Date date = new Date();
         SimpleDateFormat formater = new SimpleDateFormat("dd.MM.yy");
         Calendar calendar = Calendar.getInstance();
@@ -102,7 +113,7 @@ public class WeatherManager {
         } else {
             daily = forecastDataRight.getObject().getJSONArray("daily");
         }
-        ArrayList myArrayList = (ArrayList) daily.toList();
+        ArrayList <Object> myArrayList = (ArrayList) daily.toList();
         HashMap<String, HashMap> dailyMapHashes;
         HashMap<String, Integer> dailyMapIntegers;
         HashMap<String, Double> temperatures;
@@ -148,7 +159,4 @@ public class WeatherManager {
 
     }
 
-    public CurrentData getCurrentDataObjectRight() {
-        return currentDataObjectRight;
-    }
 }

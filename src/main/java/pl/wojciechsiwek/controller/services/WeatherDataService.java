@@ -29,7 +29,7 @@ public class WeatherDataService extends Service {
     protected Task createTask() {
         return new Task<WeatherDataResult>() {
             @Override
-            protected WeatherDataResult call() throws Exception {
+            protected WeatherDataResult call() {
                 try {
                     return getData(location, whichPane);
                 } catch (Exception e) {

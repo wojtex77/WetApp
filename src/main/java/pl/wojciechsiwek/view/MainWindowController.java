@@ -51,7 +51,7 @@ public class MainWindowController extends BaseController {
     @FXML
     private SingleLocationController rightLocationController, leftLocationController;
 
-    private Messages messages= new Messages();
+    private final Messages messages = new Messages();
 
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {

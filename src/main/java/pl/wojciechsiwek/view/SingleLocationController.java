@@ -47,13 +47,10 @@ public class SingleLocationController {
     @FXML
     private SingleDayController firstDayController, secondDayController, thirdDayController, fourthDayController, fifthDayController;
 
-    private String whichPane;
-
-    private Messages messages = new Messages();
+    private final Messages messages = new Messages();
 
 
     public void updateWeather(WeatherManager weatherManager, String location, String whichPane) {
-        this.whichPane = whichPane;
         WeatherDataService currentWeatherDataService = new WeatherDataService(weatherManager, location, whichPane);
         currentWeatherDataService.start();
         setActualizationInfo("Aktualizuję dane...");
@@ -65,11 +62,10 @@ public class SingleLocationController {
                 case SUCCESS: {
                     System.out.println("Data refreshing done");
 
-                    if (whichPane.equals("left")){
+                    if (whichPane.equals("left")) {
                         setActualConditions(weatherManager.getCurrentDataObjectLeft());
                         setForecastConditions(weatherManager.getForecastDataArrayLeft());
-                    }
-                    else {
+                    } else {
                         setActualConditions(weatherManager.getCurrentDataObjectRight());
                         setForecastConditions(weatherManager.getForecastDataArrayRight());
                     }
@@ -124,8 +120,7 @@ public class SingleLocationController {
     private String getDate() {
         Date date = new Date();
         SimpleDateFormat formatterLong = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-        String actualDate = formatterLong.format(date);
-        return actualDate;
+        return formatterLong.format(date);
     }
 
     public void setActualizationInfo(String info) {

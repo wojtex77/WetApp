@@ -7,14 +7,13 @@ public class Messages {
     private static final String tooManyConectionsMessage = "Aktualizacja danych nie powiodła się - zbyt wiele połączeń";
     private static final String incorrectAPIMessage = "Aktualizacja danych nie powiodła się - niepoprawny klucz API";
 
-    public String getNoLocationInputMessage(){
+    public String getNoLocationInputMessage() {
         return noLocationInputMessage;
     }
 
-    public  String getDataActualizationFailedMessage(){
+    public String getDataActualizationFailedMessage() {
         return dataActualizationFailedMessage;
     }
-
 
     public String getNoLocationFoundMessage() {
         return noLocationFoundMessage;

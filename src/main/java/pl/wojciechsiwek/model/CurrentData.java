@@ -3,7 +3,6 @@ package pl.wojciechsiwek.model;
 public class CurrentData {
     private Double temperature, feelsLike, longtitude, latitude;
     private Integer pressure;
-
     private String city, country, description;
 
     public String getDescription() {
