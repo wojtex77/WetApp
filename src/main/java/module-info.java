@@ -4,7 +4,6 @@ module WetApp {
     requires javafx.graphics;
     requires javafx.web;
     requires unirest.java;
-    requires com.google.gson;
     requires java.desktop;
     requires jackson.annotations;
     requires jackson.core;
