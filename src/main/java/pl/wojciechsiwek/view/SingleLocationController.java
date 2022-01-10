@@ -54,6 +54,7 @@ public class SingleLocationController {
         WeatherDataService currentWeatherDataService = new WeatherDataService(weatherManager, location, whichPane);
         currentWeatherDataService.start();
         setActualizationInfo("Aktualizuję dane...");
+        setDataVisibility(false);
 
         currentWeatherDataService.setOnSucceeded(event -> {
             WeatherDataResult weatherDataResult = (WeatherDataResult) currentWeatherDataService.getValue();
@@ -96,6 +97,22 @@ public class SingleLocationController {
         });
     }
 
+    private void setDataVisibility(boolean isVisible) {
+        forecastLabel.setVisible(isVisible);
+        coordinates.setVisible(isVisible);
+        currentLocation.setVisible(isVisible);
+        actualTemp.setVisible(isVisible);
+        tempFeel.setVisible(isVisible);
+        pressure.setVisible(isVisible);
+        actualWeathCond.setVisible(isVisible);
+
+        firstDay.setVisible(isVisible);
+        secondDay.setVisible(isVisible);
+        thirdDay.setVisible(isVisible);
+        fourthDay.setVisible(isVisible);
+        fifthDay.setVisible(isVisible);
+    }
+
     private void setForecastConditions(ArrayList<ForecastData> data) {
         firstDayController.updateData(data.get(0));
         secondDayController.updateData(data.get(1));
@@ -105,15 +122,15 @@ public class SingleLocationController {
     }
 
     private void setActualConditions(CurrentData data) {
-        forecastLabel.setVisible(true);
         coordinates.setText("Szerokość: " + data.getLatitude() + "; Długość: " + data.getLongtitude());
-        coordinates.setVisible(true);
         currentLocation.setText(data.getCity() + ", " + data.getCountry());
         actualTemp.setText(data.getTemperature() + " " + (char) 176 + "C");
         tempFeel.setText("Odczuwalna: " + data.getFeelsLike() + " " + (char) 176 + "C");
         pressure.setText("Ciśnienie: " + data.getPressure() + " hPa");
         actualWeathCond.setText(data.getDescription());
         setActualizationInfo("Ostatnio zaktualizowano " + getDate());
+
+        setDataVisibility(true);
     }
 
 

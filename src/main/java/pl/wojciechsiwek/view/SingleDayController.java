@@ -33,7 +33,17 @@ public class SingleDayController {
         hummidity.setText("wilgotność: " + data.getHummidity() + " %");
         description.setText(data.getDescription());
 
+        setDataVisibility(true);
 
+    }
+
+    private void setDataVisibility(boolean isVisible) {
+        date.setVisible(isVisible);
+        temp.setVisible(isVisible);
+        tempNight.setVisible(isVisible);
+        pressure.setVisible(isVisible);
+        hummidity.setVisible(isVisible);
+        description.setVisible(isVisible);
     }
 
 }
