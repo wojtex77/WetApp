@@ -8,7 +8,7 @@ module WetApp {
     requires jackson.annotations;
     requires jackson.core;
     requires jackson.databind;
-    requires json;
+    requires org.json;
 
     opens pl.wojciechsiwek;
     opens pl.wojciechsiwek.view;

@@ -16,39 +16,28 @@ import java.util.Date;
 
 public class SingleLocationController {
 
+    private final Messages messages = new Messages();
     @FXML
     private Label forecastLabel;
-
     @FXML
     private Label currentLocation;
-
     @FXML
     private Label actualTemp;
-
     @FXML
     private Label coordinates;
-
     @FXML
     private Label tempFeel;
-
     @FXML
     private Label actualWeathCond;
-
     @FXML
     private Label pressure;
-
     @FXML
     private Label actualizationInfo;
-
     // forecast
     @FXML
     private Parent firstDay, secondDay, thirdDay, fourthDay, fifthDay; //embeddedElements
-
     @FXML
     private SingleDayController firstDayController, secondDayController, thirdDayController, fourthDayController, fifthDayController;
-
-    private final Messages messages = new Messages();
-
 
     public void updateWeather(WeatherManager weatherManager, String location, String whichPane) {
         WeatherDataService currentWeatherDataService = new WeatherDataService(weatherManager, location, whichPane);
