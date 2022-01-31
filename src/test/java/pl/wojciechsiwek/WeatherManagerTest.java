@@ -56,4 +56,18 @@ class WeatherManagerTest {
         assertThat(weatherManager.getCurrentDataObjectRight().getDescription(), equalTo("zachmurzenie umiarkowane"));
 
     }
+
+
+    @Test
+    void shouldConvertJSONToProperForecastWeatherObject() throws IOException {
+        //given
+        weatherManager.setForecastDataRight(forecastData);
+
+        //when
+        weatherManager.convertForecastToObject("right");
+
+        //then
+        assertThat(weatherManager.getForecastDataArrayRight(), notNullValue());
+        assertThat(weatherManager.getCurrentDataObjectLeft(), nullValue());
+    }
 }
