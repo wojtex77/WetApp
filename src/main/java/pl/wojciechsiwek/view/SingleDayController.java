@@ -24,6 +24,30 @@ public class SingleDayController {
     @FXML
     private Label date;
 
+    public Label getTemp() {
+        return temp;
+    }
+
+    public Label getTempNight() {
+        return tempNight;
+    }
+
+    public Label getPressure() {
+        return pressure;
+    }
+
+    public Label getHummidity() {
+        return hummidity;
+    }
+
+    public Label getDescription() {
+        return description;
+    }
+
+    public Label getDate() {
+        return date;
+    }
+
     public void updateData(ForecastData data) {
 
         date.setText(data.getDate());

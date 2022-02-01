@@ -25,7 +25,7 @@ class WeatherManagerTest {
     }
 
     @Test
-    void shouldConvertJSONToProperCurrentWeatherObject() throws IOException {
+    void shouldConvertJSONToProperCurrentWeatherObject() {
         //given
         weatherManager.setCurrentDataRight(currentData);
 
@@ -38,7 +38,7 @@ class WeatherManagerTest {
     }
 
     @Test
-    void shouldSetProperCurrentWeatherData() throws IOException {
+    void shouldSetProperCurrentWeatherData() {
         //given
         weatherManager.setCurrentDataRight(currentData);
 
@@ -59,7 +59,7 @@ class WeatherManagerTest {
 
 
     @Test
-    void shouldConvertJSONToProperForecastWeatherObject() throws IOException {
+    void shouldConvertJSONToProperForecastWeatherObject() {
         //given
         weatherManager.setForecastDataRight(forecastData);
 
@@ -72,7 +72,7 @@ class WeatherManagerTest {
     }
 
     @Test
-    void shouldSetProperForecastWeatherData() throws IOException {
+    void shouldSetProperForecastWeatherData() {
         //given
         weatherManager.setForecastDataRight(forecastData);
 
