@@ -70,4 +70,25 @@ class WeatherManagerTest {
         assertThat(weatherManager.getForecastDataArrayRight(), notNullValue());
         assertThat(weatherManager.getCurrentDataObjectLeft(), nullValue());
     }
+
+    @Test
+    void shouldSetProperForecastWeatherData() throws IOException {
+        //given
+        weatherManager.setForecastDataRight(forecastData);
+
+        //when
+        weatherManager.convertForecastToObject("right");
+
+        //then
+
+        assertThat(weatherManager.getForecastDataArrayRight().get(2).getTempDay(), equalTo(1.47));
+        assertThat(weatherManager.getForecastDataArrayRight().get(2).getTempNight(), equalTo(0.37));
+        assertThat(weatherManager.getForecastDataArrayRight().get(2).getPressure(), equalTo(994));
+        assertThat(weatherManager.getForecastDataArrayRight().get(2).getHummidity(), equalTo(97));
+        assertThat(weatherManager.getForecastDataArrayRight().get(2).getDescription(), equalTo("śnieg z deszczem"));
+
+    }
+
+
+
 }
