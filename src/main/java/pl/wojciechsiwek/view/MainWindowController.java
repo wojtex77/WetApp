@@ -19,39 +19,28 @@ import java.net.URISyntaxException;
 
 public class MainWindowController extends BaseController {
 
+    private final Messages messages = new Messages();
     @FXML
     private MenuBar menuBar;
-
     @FXML
     private Button refreshButton;
-
     @FXML
     private MenuItem exitButton;
-
     @FXML
     private MenuItem aboutProgramButton;
-
     @FXML
     private MenuItem aboutAuthorButton;
-
     @FXML
     private SplitPane splitPane;
-
     @FXML
     private TextField localizationInputRight;
-
     @FXML
     private TextField localizationInputLeft;
-
-
     //right side location embedded
     @FXML
     private Parent rightLocation, leftLocation; //embeddedElement
-
     @FXML
     private SingleLocationController rightLocationController, leftLocationController;
-
-    private final Messages messages = new Messages();
 
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {

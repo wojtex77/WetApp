@@ -5,10 +5,7 @@ module WetApp {
     requires javafx.web;
     requires unirest.java;
     requires java.desktop;
-    requires jackson.annotations;
-    requires jackson.core;
-    requires jackson.databind;
-    requires json;
+    requires org.json;
 
     opens pl.wojciechsiwek;
     opens pl.wojciechsiwek.view;

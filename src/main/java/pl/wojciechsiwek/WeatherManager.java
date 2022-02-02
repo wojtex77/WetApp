@@ -81,8 +81,8 @@ public class WeatherManager {
         JSONObject sys = data.getObject().getJSONObject("sys");
         JSONObject coord = data.getObject().getJSONObject("coord");
         JSONArray weather = data.getObject().getJSONArray("weather");
-        ArrayList <Object> myArrayList = (ArrayList) weather.toList();
-        HashMap<String, Integer> desc = (HashMap <String, Integer>) myArrayList.get(0);
+        ArrayList<Object> myArrayList = (ArrayList) weather.toList();
+        HashMap<String, Integer> desc = (HashMap<String, Integer>) myArrayList.get(0);
 
         currentData.setTemperature(main.getDouble("temp"));
         currentData.setFeelsLike(main.getDouble("feels_like"));
@@ -112,7 +112,7 @@ public class WeatherManager {
         } else {
             daily = forecastDataRight.getObject().getJSONArray("daily");
         }
-        ArrayList <Object> myArrayList = (ArrayList) daily.toList();
+        ArrayList<Object> myArrayList = (ArrayList) daily.toList();
         HashMap<String, HashMap<String, Double>> dailyMapHashes;
         HashMap<String, Integer> dailyMapIntegers;
         HashMap temperatures;
@@ -125,7 +125,7 @@ public class WeatherManager {
 
         for (int i = 0; i < 5; i++) {
             dailyMapHashes = (HashMap<String, HashMap<String, Double>>) myArrayList.get(i);
-            dailyMapIntegers = (HashMap <String, Integer>) myArrayList.get(i);
+            dailyMapIntegers = (HashMap<String, Integer>) myArrayList.get(i);
             temperatures = dailyMapHashes.get("temp");
 
             desc = (HashMap) myArrayList.get(i);
