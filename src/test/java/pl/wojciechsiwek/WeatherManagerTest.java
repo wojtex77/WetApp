@@ -1,11 +1,13 @@
 package pl.wojciechsiwek;
 
 import com.mashape.unirest.http.JsonNode;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,12 +15,12 @@ import static org.hamcrest.Matchers.*;
 
 class WeatherManagerTest {
 
-    private static JsonNode currentData;
-    private static WeatherManager weatherManager;
-    private static JsonNode forecastData;
+    private JsonNode currentData;
+    private WeatherManager weatherManager;
+    private JsonNode forecastData;
 
-    @BeforeAll
-    static void readCurrentWeatherDataFile() throws IOException {
+    @BeforeEach
+    void readCurrentWeatherDataFile() throws IOException {
         weatherManager = new WeatherManager();
         currentData = new JsonNode(new String(Objects.requireNonNull(WeatherManagerTest.class.getResourceAsStream("/currentWeather.json")).readAllBytes(), StandardCharsets.UTF_8));
         forecastData = new JsonNode(new String(Objects.requireNonNull(WeatherManagerTest.class.getResourceAsStream("/forecastWeather.json")).readAllBytes(), StandardCharsets.UTF_8));
@@ -76,6 +78,9 @@ class WeatherManagerTest {
         //given
         weatherManager.setForecastDataRight(forecastData);
 
+        LocalDate date = LocalDate.now().plusDays(3);
+        String parsedDate = date.format(DateTimeFormatter.ofPattern("dd.MM.yy"));
+
         //when
         weatherManager.convertForecastToObject("right");
 
@@ -86,9 +91,20 @@ class WeatherManagerTest {
         assertThat(weatherManager.getForecastDataArrayRight().get(2).getPressure(), equalTo(994));
         assertThat(weatherManager.getForecastDataArrayRight().get(2).getHummidity(), equalTo(97));
         assertThat(weatherManager.getForecastDataArrayRight().get(2).getDescription(), equalTo("śnieg z deszczem"));
-
+        assertThat(weatherManager.getForecastDataArrayRight().get(2).getDate(), equalTo(parsedDate));
     }
 
+    @Test
+    void shouldSetDataAllForFiveDays() {
 
+        //given
+        weatherManager.setForecastDataRight(forecastData);
 
+        //when
+        weatherManager.convertForecastToObject("right");
+
+        //then
+        assertThat(weatherManager.getForecastDataArrayRight(), hasSize(5));
+
+    }
 }
