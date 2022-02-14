@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -20,8 +20,8 @@ class WeatherManagerTest {
     @BeforeAll
     static void readCurrentWeatherDataFile() throws IOException {
         weatherManager = new WeatherManager();
-        currentData = new JsonNode(Files.readString(Path.of("src/test/resources/currentWeather.json")));
-        forecastData = new JsonNode(Files.readString(Path.of("src/test/resources/forecastWeather.json")));
+        currentData = new JsonNode(new String(Objects.requireNonNull(WeatherManagerTest.class.getResourceAsStream("/currentWeather.json")).readAllBytes(), StandardCharsets.UTF_8));
+        forecastData = new JsonNode(new String(Objects.requireNonNull(WeatherManagerTest.class.getResourceAsStream("/forecastWeather.json")).readAllBytes(), StandardCharsets.UTF_8));
     }
 
     @Test
