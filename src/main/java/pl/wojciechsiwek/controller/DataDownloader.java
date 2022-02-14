@@ -12,8 +12,8 @@ import java.util.Locale;
 public class DataDownloader {
 
 
-    private String whichPane;
-    private WeatherManager weatherManager;
+    private final String whichPane;
+    private final WeatherManager weatherManager;
     private String location;
 
     public DataDownloader(String whichPane, WeatherManager weatherManager, String location) {

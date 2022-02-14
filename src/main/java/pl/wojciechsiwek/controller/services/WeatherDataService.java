@@ -8,7 +8,7 @@ import pl.wojciechsiwek.controller.WeatherDataResult;
 
 public class WeatherDataService extends Service {
 
-    private DataDownloader dataDownloader;
+    private final DataDownloader dataDownloader;
 
     public WeatherDataService(WeatherManager weatherManager, String location, String whichPane) {
         this.dataDownloader = new DataDownloader(whichPane,weatherManager, location);
