@@ -1,1 +1,44 @@
-{"coord":{"lon":21.0118,"lat":52.2298},"weather":[{"id":803,"main":"Clouds","description":"zachmurzenie umiarkowane","icon":"04n"}],"base":"stations","main":{"temp":-1.75,"feels_like":-3.47,"temp_min":-4.1,"temp_max":-0.1,"pressure":1001,"humidity":81},"visibility":10000,"wind":{"speed":1.34,"deg":0,"gust":2.68},"clouds":{"all":75},"dt":1643663142,"sys":{"type":2,"id":2035775,"country":"PL","sunrise":1643609917,"sunset":1643642399},"timezone":3600,"id":756135,"name":"Warszawa","cod":200}
+{
+  "coord": {
+    "lon": 21.0118,
+    "lat": 52.2298
+  },
+  "weather": [
+    {
+      "id": 803,
+      "main": "Clouds",
+      "description": "zachmurzenie umiarkowane",
+      "icon": "04n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": -1.75,
+    "feels_like": -3.47,
+    "temp_min": -4.1,
+    "temp_max": -0.1,
+    "pressure": 1001,
+    "humidity": 81
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.34,
+    "deg": 0,
+    "gust": 2.68
+  },
+  "clouds": {
+    "all": 75
+  },
+  "dt": 1643663142,
+  "sys": {
+    "type": 2,
+    "id": 2035775,
+    "country": "PL",
+    "sunrise": 1643609917,
+    "sunset": 1643642399
+  },
+  "timezone": 3600,
+  "id": 756135,
+  "name": "Warszawa",
+  "cod": 200
+}
